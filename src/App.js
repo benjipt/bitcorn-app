@@ -10,7 +10,8 @@ export default class App extends Component {
     this.state = {
       isLoggedIn: false,
       loggedInAddress: '',
-      data: ''
+      balance: '',
+      transactions: ''
     }
 
     this.handleLogin = this.handleLogin.bind(this)
@@ -27,16 +28,21 @@ export default class App extends Component {
   getData(address) {
     fetch(baseURL + 'addresses/' + address)
       .then(data => { return data.json()}, err => console.log(err))
-      .then(parsedData => this.setState({ data: parsedData }), err => console.log(err))
+      .then(parsedData => this.setState({ 
+        balance: parsedData.balance,
+        transactions: parsedData.transactions }), err => console.log(err))
   }
 
   render() {
     return (
       <div className="container text-center mt-5">
         <h1>JOBCOIN</h1>
-        <SignInForm
-          handleLogin={ this.handleLogin }
-          getData={ this.getData } />
+
+        { !this.state.isLoggedIn && 
+          <SignInForm
+            handleLogin={ this.handleLogin }
+            getData={ this.getData } /> }
+
       </div>
     )
   }
