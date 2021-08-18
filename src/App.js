@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import SignInForm from './components/SignInForm'
+import SignInPage from './components/SignInPage'
 
 const baseURL = 'https://jobcoin.gemini.com/greyhound-abruptly/api/'
 
@@ -35,14 +35,11 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className="container text-center mt-5">
-        <h1>JOBCOIN</h1>
-
+      <div>
         { !this.state.isLoggedIn && 
-          <SignInForm
+          <SignInPage
             handleLogin={ this.handleLogin }
             getData={ this.getData } /> }
-
       </div>
     )
   }
