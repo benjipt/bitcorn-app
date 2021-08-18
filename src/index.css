@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+/* form {
+  border: thin solid black;
+} */
+
 .body-style {
   background-color: ghostwhite;
 }
