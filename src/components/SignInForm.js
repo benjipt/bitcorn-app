@@ -1,6 +1,20 @@
 import React, { Component } from 'react'
 
 export default class SignInForm extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            addressInput: ''
+        }
+
+        this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleChange(event) {
+        this.setState({ [event.currentTarget.id]: event.currentTarget.value })
+    }
+
     render() {
         return (
             <div className="mt-5">
@@ -8,10 +22,10 @@ export default class SignInForm extends Component {
                 <form className="mt-4">
                     <div className="row g-3 align-items-center justify-content-center">
                     <div className="col-auto">
-                        <label htmlFor="address" className="form-label">Address</label>
+                        <label htmlFor="addressInput" className="form-label">Address</label>
                     </div>
                     <div className="col-auto">
-                        <input type="text" className="form-control" id="address" placeholder="Jilly" />
+                        <input onChange={ this.handleChange } type="text" className="form-control" id="addressInput" placeholder="Jilly" />
                     </div>
                     <div className="col-auto">
                         <button type="submit" className="btn btn-primary">Sign In</button>
