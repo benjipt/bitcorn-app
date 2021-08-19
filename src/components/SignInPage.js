@@ -26,7 +26,7 @@ export default class SignInPage extends Component {
         return (
             <div className="container text-center mt-5">
                 <h1>JOBCOIN</h1>
-                <div className="mt-5">
+                <div className="mt-5 p-4 border-black rounded sign-in">
                     <p>Welcome! Please sign in with your JOBCOIN address.</p>
                     <form onSubmit={ this.handleSubmit } className="mt-4">
                         <div className="row g-3 align-items-center justify-content-center">
