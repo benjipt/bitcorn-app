@@ -47,8 +47,9 @@ p {
 
 .btn-outline-dark:hover {
   color: #F5F3F6;
+  background-color: #221D23;
 }
 
-.balance {
+.card-custom {
   background-color: #F5F3F6;
 }
