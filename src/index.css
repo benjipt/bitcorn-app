@@ -36,3 +36,15 @@ p {
 .sign-in {
   background-color: #FDF7D8;
 }
+
+.app-bar {
+  background-color: #F5F3F6;
+}
+
+.app-bar-border {
+  border-bottom: thin solid #221D23;
+}
+
+.btn-outline-dark:hover {
+  color: #F5F3F6;
+}
