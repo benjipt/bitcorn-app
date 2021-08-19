@@ -54,7 +54,8 @@ export default class App extends Component {
 
         { this.state.isLoggedIn &&
           <AppBar 
-            handleLogout={ this.handleLogout } /> }
+            handleLogout={ this.handleLogout }
+            address={ this.state.loggedInAddress } /> }
       </div>
     )
   }

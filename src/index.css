@@ -45,6 +45,10 @@ p {
   border-bottom: thin solid #221D23;
 }
 
+.address {
+  line-height: ;
+}
+
 .btn-outline-dark:hover {
   color: #F5F3F6;
 }
