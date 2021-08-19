@@ -17,14 +17,16 @@ export default class App extends Component {
 
     this.handleLogin = this.handleLogin.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
-    this.getData = this.getData.bind(this)
   }
 
   handleLogin(address) {
-    this.setState({
-      isLoggedIn: true,
-      loggedInAddress: address
-    })
+    fetch(baseURL + 'addresses/' + address)
+      .then(data => { return data.json()}, err => console.log(err))
+      .then(parsedData => this.setState({ 
+        isLoggedIn: true,
+        loggedInAddress: address,
+        balance: parsedData.balance,
+        transactions: parsedData.transactions }), err => console.log(err))
   }
 
   handleLogout() {
@@ -36,21 +38,12 @@ export default class App extends Component {
     })
   }
 
-  getData(address) {
-    fetch(baseURL + 'addresses/' + address)
-      .then(data => { return data.json()}, err => console.log(err))
-      .then(parsedData => this.setState({ 
-        balance: parsedData.balance,
-        transactions: parsedData.transactions }), err => console.log(err))
-  }
-
   render() {
     return (
       <div>
         { !this.state.isLoggedIn && 
           <SignInPage
-            handleLogin={ this.handleLogin }
-            getData={ this.getData } /> }
+            handleLogin={ this.handleLogin } /> }
 
         { this.state.isLoggedIn &&
           <AppBar 
