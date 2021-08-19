@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import AppBar from './components/AppBar'
 import SignInPage from './components/SignInPage'
+import AppBar from './components/AppBar'
+import BalanceCard from './components/BalanceCard'
 
 const baseURL = 'https://jobcoin.gemini.com/greyhound-abruptly/api/'
 
@@ -49,6 +50,10 @@ export default class App extends Component {
           <AppBar 
             handleLogout={ this.handleLogout }
             address={ this.state.loggedInAddress } /> }
+
+        { this.state.isLoggedIn &&
+          <BalanceCard 
+            balance={ this.state.balance } /> }
       </div>
     )
   }
