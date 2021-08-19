@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
+import AppBar from './components/AppBar'
 import SignInPage from './components/SignInPage'
-import SignOutBtn from './components/SignOutBtn'
 
 const baseURL = 'https://jobcoin.gemini.com/greyhound-abruptly/api/'
 
@@ -53,7 +53,7 @@ export default class App extends Component {
             getData={ this.getData } /> }
 
         { this.state.isLoggedIn &&
-          <SignOutBtn 
+          <AppBar 
             handleLogout={ this.handleLogout } /> }
       </div>
     )
