@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import SignInPage from './components/SignInPage'
+import SignOutBtn from './components/SignOutBtn'
 
 const baseURL = 'https://jobcoin.gemini.com/greyhound-abruptly/api/'
 
@@ -15,6 +16,7 @@ export default class App extends Component {
     }
 
     this.handleLogin = this.handleLogin.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
     this.getData = this.getData.bind(this)
   }
 
@@ -22,6 +24,15 @@ export default class App extends Component {
     this.setState({
       isLoggedIn: true,
       loggedInAddress: address
+    })
+  }
+
+  handleLogout() {
+    this.setState({
+      isLoggedIn: false,
+      loggedInAddress: '',
+      balance: '',
+      transactions: ''
     })
   }
 
@@ -40,6 +51,10 @@ export default class App extends Component {
           <SignInPage
             handleLogin={ this.handleLogin }
             getData={ this.getData } /> }
+
+        { this.state.isLoggedIn &&
+          <SignOutBtn 
+            handleLogout={ this.handleLogout } /> }
       </div>
     )
   }
