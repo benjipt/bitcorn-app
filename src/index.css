@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono&display=swap');
 
 body {
   margin: 0;
@@ -20,17 +20,10 @@ h1 {
   color: #221D23;
 }
 
-h5, p, label {
+p {
+  font-family: 'Space Mono', monospace;
   color: #221D23;
 }
-
-input {
-  color: #221D23;
-}
-
-/* form {
-  border: thin solid black;
-} */
 
 .body-style {
   background-color: #F9DC5C;

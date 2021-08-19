@@ -27,11 +27,11 @@ export default class SignInPage extends Component {
             <div className="container text-center mt-5">
                 <h1>JOBCOIN</h1>
                 <div className="mt-5 p-4 border-black rounded sign-in">
-                    <p>Welcome! Please sign in with your JOBCOIN address.</p>
+                    <p>Welcome! Please sign in with your JobCoin address:</p>
                     <form onSubmit={ this.handleSubmit } className="mt-4">
                         <div className="row g-3 align-items-center justify-content-center">
                             <div className="col-auto">
-                                <label htmlFor="address" className="form-label">Address</label>
+                                <label htmlFor="address" className="form-label visually-hidden">Address</label>
                             </div>
                             <div className="col-auto">
                                 <input onChange={ this.handleChange } type="text" className="form-control" id="address" placeholder="Jilly" />
