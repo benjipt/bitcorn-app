@@ -57,7 +57,8 @@ export default class App extends Component {
             balance={ this.state.balance } /> }
 
         { this.state.isLoggedIn &&
-          <SendCard /> }
+          <SendCard 
+            address={ this.state.loggedInAddress } /> }
       </div>
     )
   }
