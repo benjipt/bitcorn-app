@@ -17,11 +17,11 @@ export default class App extends Component {
       transactions: ''
     }
 
-    this.handleLogin = this.handleLogin.bind(this)
+    this.getData = this.getData.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
   }
 
-  handleLogin(address) {
+  getData(address) {
     fetch(baseURL + 'addresses/' + address)
       .then(data => { return data.json()}, err => console.log(err))
       .then(parsedData => this.setState({ 
@@ -45,7 +45,7 @@ export default class App extends Component {
       <div>
         { !this.state.isLoggedIn && 
           <SignInPage
-            handleLogin={ this.handleLogin } /> }
+            getData={ this.getData } /> }
 
         { this.state.isLoggedIn &&
           <AppBar 
@@ -58,7 +58,8 @@ export default class App extends Component {
 
         { this.state.isLoggedIn &&
           <SendCard 
-            address={ this.state.loggedInAddress } /> }
+            address={ this.state.loggedInAddress }
+            getData={ this.getData } /> }
       </div>
     )
   }

@@ -40,6 +40,7 @@ export default class SendCard extends Component {
                     amount: '',
                     nsfError: false
                 })
+                this.props.getData(this.props.address)
             })
             .catch(error => {
                 console.log('Error: ' + error)

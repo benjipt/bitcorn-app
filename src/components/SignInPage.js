@@ -18,7 +18,7 @@ export default class SignInPage extends Component {
 
     handleSubmit(event) {
         event.preventDefault()
-        this.props.handleLogin(this.state.address)
+        this.props.getData(this.state.address)
     }
 
     render() {
