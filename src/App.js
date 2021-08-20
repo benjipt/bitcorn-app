@@ -14,21 +14,36 @@ export default class App extends Component {
       isLoggedIn: false,
       loggedInAddress: '',
       balance: '',
-      transactions: ''
+      transactions: [],
+      runningBalance: []
     }
 
     this.getData = this.getData.bind(this)
+    this.setRunningBalance = this.setRunningBalance.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
   }
 
   getData(address) {
     fetch(baseURL + 'addresses/' + address)
       .then(data => { return data.json()}, err => console.log(err))
-      .then(parsedData => this.setState({ 
+      .then(parsedData => {
+        this.setState({ 
         isLoggedIn: true,
         loggedInAddress: address,
         balance: parsedData.balance,
-        transactions: parsedData.transactions }), err => console.log(err))
+        transactions: parsedData.transactions })
+        this.setRunningBalance(this.state.transactions)
+      }, err => console.log(err))
+  }
+
+  setRunningBalance(transactions) {
+    let currentBalance = 0
+    for (let transaction of transactions) {
+      if (transaction.toAddress === this.state.loggedInAddress) {
+        currentBalance += Number(transaction.amount)
+      }
+    }
+    console.log(currentBalance)
   }
 
   handleLogout() {
@@ -36,7 +51,7 @@ export default class App extends Component {
       isLoggedIn: false,
       loggedInAddress: '',
       balance: '',
-      transactions: ''
+      transactions: []
     })
   }
 
