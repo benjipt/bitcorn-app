@@ -32,22 +32,18 @@ export default class SendCard extends Component {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(res => res.json())
-            .then(resJson => {
-                console.log('Successful POST: ' + resJson)
+        }).then(res => {
+            if (res.status === 422) {
+                this.setState({ nsfError: true })
+            } else {
                 this.setState({
                     toAddress: '',
                     amount: '',
                     nsfError: false
                 })
                 this.props.getData(this.props.address)
-            })
-            .catch(error => {
-                console.log('Error: ' + error)
-                this.setState({
-                    nsfError: true
-                })
-            })
+            }
+        })
     }
 
     render() {
@@ -65,6 +61,8 @@ export default class SendCard extends Component {
                     <div className="mb-3">
                         <label htmlFor="amount" className="form-label">Amount to Send</label>
                         <input onChange={ this.handleChange } type="text" className="form-control" id="amount" value={this.state.amount} />
+                        { this.state.nsfError &&
+                            <div id="nsfError" className="form-text">You do not have enough funds to send this amount.</div> }
                     </div>
                     <button type="submit" className="btn btn-primary">Send</button>
                 </form>
