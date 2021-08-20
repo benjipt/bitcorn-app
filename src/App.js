@@ -4,6 +4,7 @@ import SignInPage from './components/SignInPage'
 import AppBar from './components/AppBar'
 import BalanceCard from './components/BalanceCard'
 import SendCard from './components/SendCard'
+import ChartCard from './components/ChartCard'
 
 const baseURL = 'https://jobcoin.gemini.com/greyhound-abruptly/api/'
 
@@ -101,6 +102,9 @@ export default class App extends Component {
           <SendCard 
             address={ this.state.loggedInAddress }
             getData={ this.getData } /> }
+
+        { this.state.isLoggedIn &&
+          <ChartCard /> }
       </div>
     )
   }
