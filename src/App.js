@@ -38,14 +38,19 @@ export default class App extends Component {
 
   setRunningBalance(transactions) {
     let currentBalance = 0
+    let balanceArr = []
     for (let transaction of transactions) {
       if (transaction.toAddress === this.state.loggedInAddress) {
         currentBalance += Number(transaction.amount)
+        const plot = { amount: currentBalance, date: transaction.timestamp }
+        balanceArr.push(plot)
       } else {
         currentBalance -= Number(transaction.amount)
+        const plot = { amount: currentBalance, date: transaction.timestamp }
+        balanceArr.push(plot)
       }
     }
-    console.log(currentBalance)
+    this.setState({ runningBalance: balanceArr })
   }
 
   handleLogout() {
