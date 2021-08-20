@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { format } from 'date-fns'
 import SignInPage from './components/SignInPage'
 import AppBar from './components/AppBar'
 import BalanceCard from './components/BalanceCard'
@@ -42,11 +43,13 @@ export default class App extends Component {
     for (let transaction of transactions) {
       if (transaction.toAddress === this.state.loggedInAddress) {
         currentBalance += Number(transaction.amount)
-        const plot = { amount: currentBalance, date: transaction.timestamp }
+        const formattedDate = format(new Date(transaction.timestamp), 'yyyy-MM-dd')
+        const plot = { amount: currentBalance, date: formattedDate }
         balanceArr.push(plot)
       } else {
         currentBalance -= Number(transaction.amount)
-        const plot = { amount: currentBalance, date: transaction.timestamp }
+        const formattedDate = format(new Date(transaction.timestamp), 'yyyy-MM-dd')
+        const plot = { amount: currentBalance, date: formattedDate }
         balanceArr.push(plot)
       }
     }
