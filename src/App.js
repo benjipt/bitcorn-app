@@ -21,6 +21,8 @@ export default class App extends Component {
 
     this.getData = this.getData.bind(this)
     this.setRunningBalance = this.setRunningBalance.bind(this)
+    this.generatePlot = this.generatePlot.bind(this)
+    this.updateBalanceArr = this.updateBalanceArr.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
   }
 
@@ -43,17 +45,31 @@ export default class App extends Component {
     for (let transaction of transactions) {
       if (transaction.toAddress === this.state.loggedInAddress) {
         currentBalance += Number(transaction.amount)
-        const formattedDate = format(new Date(transaction.timestamp), 'yyyy-MM-dd')
-        const plot = { amount: currentBalance, date: formattedDate }
-        balanceArr.push(plot)
       } else {
         currentBalance -= Number(transaction.amount)
-        const formattedDate = format(new Date(transaction.timestamp), 'yyyy-MM-dd')
-        const plot = { amount: currentBalance, date: formattedDate }
-        balanceArr.push(plot)
       }
+      const plot = this.generatePlot(transaction, currentBalance)
+      this.updateBalanceArr(plot, balanceArr)
     }
     this.setState({ runningBalance: balanceArr })
+  }
+
+  generatePlot(transaction, currentBalance) {
+    const formattedDate = format(new Date(transaction.timestamp), 'yyyy-MM-dd')
+    return { amount: currentBalance, date: formattedDate }
+  }
+
+  updateBalanceArr(plot, balanceArr) {
+    const lastIndex = balanceArr.length - 1
+    if (lastIndex > -1) {
+      if (plot.date === balanceArr[lastIndex].date) {
+        balanceArr.splice(lastIndex, 1, plot)
+      } else {
+        balanceArr.push(plot)
+      }
+    } else {
+      balanceArr.push(plot)
+    }
   }
 
   handleLogout() {
