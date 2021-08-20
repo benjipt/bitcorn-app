@@ -41,6 +41,8 @@ export default class App extends Component {
     for (let transaction of transactions) {
       if (transaction.toAddress === this.state.loggedInAddress) {
         currentBalance += Number(transaction.amount)
+      } else {
+        currentBalance -= Number(transaction.amount)
       }
     }
     console.log(currentBalance)
