@@ -16,8 +16,9 @@ A simple sign-on screen and user interface for a fake cryptocurrency called JobC
 - date-fns
 
 ## Project status
-Complete
-- Issue with ResizeDetector (Recharts dependency) - does not always resize chart when window is resized by user.
+Complete w/ improvement opportunities:
+- Investigate issue with ResizeDetector (Recharts dependency), does not always resize chart when window is resized by user.
+- Refactor getData function in App component so that transactions state is removed from App (redundant data).
 
 ## Launch
 View [here](https://jobcoin-1c304e.netlify.app/)
