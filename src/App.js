@@ -104,7 +104,8 @@ export default class App extends Component {
             getData={ this.getData } /> }
 
         { this.state.isLoggedIn &&
-          <ChartCard /> }
+          <ChartCard 
+            data={ this.state.runningBalance } /> }
       </div>
     )
   }
