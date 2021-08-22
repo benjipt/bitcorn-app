@@ -11,13 +11,21 @@ export default class JobCoinUI extends Component {
                 <AppBar 
                     address={ this.props.address }
                     handleLogout={ this.props.handleLogout } />
-                <BalanceCard 
-                    balance={ this.props.balance } />
-                <SendCard 
-                    address={ this.props.address }
-                    getData={ this.props.getData } />
-                <ChartCard 
-                    data={ this.props.data } />
+                <div className="container-fluid">
+                    <div className="row ps-3">
+                        <div className="row col-4 me-3">
+                            <BalanceCard 
+                                balance={ this.props.balance } />
+                            <SendCard 
+                                address={ this.props.address }
+                                getData={ this.props.getData } />
+                        </div>
+                        <div className="row col-8">
+                            <ChartCard 
+                                data={ this.props.data } />
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }

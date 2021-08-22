@@ -9,7 +9,7 @@ export default class ChartCard extends Component {
                     <h5>Balance History</h5>
                 </div>
                 <hr></hr>
-                <ResponsiveContainer width="100%" height={300}>
+                <ResponsiveContainer width="100%" height={550}>
                     <BarChart data={ this.props.data }>
                         <XAxis dataKey="date" />
                         <YAxis />
