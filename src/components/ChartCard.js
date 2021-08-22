@@ -14,8 +14,7 @@ export default class ChartCard extends Component {
                         <XAxis dataKey="date" />
                         <YAxis />
                         <Tooltip />
-                        <Legend />
-                        <Line type="monotone" dataKey="amount" stroke="#3E92CC" />
+                        <Line type="monotone" dataKey="amount" stroke="#3E92CC" strokeWidth={4} />
                     </LineChart>
                 </ResponsiveContainer>
             </div>
