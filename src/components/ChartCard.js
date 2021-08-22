@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BarChart, Bar, Legend, Tooltip, XAxis, YAxis, ResponsiveContainer } from 'recharts'
+import { Legend, Tooltip, XAxis, YAxis, ResponsiveContainer, LineChart, Line } from 'recharts'
 
 export default class ChartCard extends Component {
     render() {
@@ -10,13 +10,13 @@ export default class ChartCard extends Component {
                 </div>
                 <hr></hr>
                 <ResponsiveContainer width="100%" height={550}>
-                    <BarChart data={ this.props.data }>
+                    <LineChart data={ this.props.data }>
                         <XAxis dataKey="date" />
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Bar dataKey="amount" fill="#3E92CC" />
-                    </BarChart>
+                        <Line type="monotone" dataKey="amount" stroke="#3E92CC" />
+                    </LineChart>
                 </ResponsiveContainer>
             </div>
         )
