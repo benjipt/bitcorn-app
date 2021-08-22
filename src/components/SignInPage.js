@@ -5,7 +5,8 @@ export default class SignInPage extends Component {
         super(props)
 
         this.state = {
-            address: ''
+            address: '',
+            submitError: false
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -18,7 +19,11 @@ export default class SignInPage extends Component {
 
     handleSubmit(event) {
         event.preventDefault()
-        this.props.getData(this.state.address)
+        if (!this.state.address) {
+            this.setState({ submitError: true })
+        } else {
+            this.props.getData(this.state.address)
+        }
     }
 
     render() {
@@ -39,6 +44,8 @@ export default class SignInPage extends Component {
                             <div className="col-auto">
                                 <button type="submit" className="btn btn-primary">Sign In</button>
                             </div>
+                            { this.state.submitError && 
+                                <div id="submitError" className="form-text pt-2">Must enter an address to sign in.</div> }
                         </div>
                     </form>
                 </div>
