@@ -10,7 +10,7 @@ export default class ChartCard extends Component {
                 </div>
                 <hr></hr>
                 <ResponsiveContainer width="100%" height={300}>
-                    <BarChart bargGap="20" data={ this.props.data }>
+                    <BarChart data={ this.props.data }>
                         <XAxis dataKey="date" />
                         <YAxis />
                         <Tooltip />

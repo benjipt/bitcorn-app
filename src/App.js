@@ -5,6 +5,7 @@ import AppBar from './components/AppBar'
 import BalanceCard from './components/BalanceCard'
 import SendCard from './components/SendCard'
 import ChartCard from './components/ChartCard'
+import JobCoinUI from './components/JobCoinUI'
 
 const baseURL = 'https://jobcoin.gemini.com/greyhound-abruptly/api/'
 
@@ -90,21 +91,11 @@ export default class App extends Component {
             getData={ this.getData } /> }
 
         { this.state.isLoggedIn &&
-          <AppBar 
+          <JobCoinUI 
             handleLogout={ this.handleLogout }
-            address={ this.state.loggedInAddress } /> }
-
-        { this.state.isLoggedIn &&
-          <BalanceCard 
-            balance={ this.state.balance } /> }
-
-        { this.state.isLoggedIn &&
-          <SendCard 
             address={ this.state.loggedInAddress }
-            getData={ this.getData } /> }
-
-        { this.state.isLoggedIn &&
-          <ChartCard 
+            balance={ this.state.balance }
+            getData={ this.getData }
             data={ this.state.runningBalance } /> }
       </div>
     )
