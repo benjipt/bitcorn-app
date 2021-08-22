@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Legend, Tooltip, XAxis, YAxis, ResponsiveContainer, LineChart, Line } from 'recharts'
+import { Tooltip, XAxis, YAxis, ResponsiveContainer, LineChart, Line } from 'recharts'
 
 export default class ChartCard extends Component {
     render() {
@@ -14,7 +14,7 @@ export default class ChartCard extends Component {
                         <XAxis dataKey="date" />
                         <YAxis />
                         <Tooltip />
-                        <Line type="monotone" dataKey="amount" stroke="#3E92CC" strokeWidth={4} />
+                        <Line type="monotone" dataKey="amount" stroke="#FF3366" strokeWidth={4} />
                     </LineChart>
                 </ResponsiveContainer>
             </div>

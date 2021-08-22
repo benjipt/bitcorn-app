@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono&family=Work+Sans&display=swap');
 
 body {
   margin: 0;
@@ -14,9 +14,20 @@ code {
     monospace;
 }
 
+.body-style {
+  background-color: #F9DC5C;
+  font-family: 'Work Sans', sans-serif;
+  color: #221D23;
+}
+
 h1 {
   font-family: 'Press Start 2P', cursive;
   font-size: 56px;
+  color: #221D23;
+}
+
+h4 {
+  font-family: 'Space Mono', monospace;
   color: #221D23;
 }
 
@@ -25,9 +36,6 @@ p {
   color: #221D23;
 }
 
-.body-style {
-  background-color: #F9DC5C;
-}
 
 .border-black {
   border: thin solid #221D23;
@@ -52,4 +60,9 @@ p {
 
 .card-custom {
   background-color: #F5F3F6;
+}
+
+.balance {
+  font-size: 1.8rem;
+  color: #3E92CC;
 }
