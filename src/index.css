@@ -36,7 +36,6 @@ p {
   color: #221D23;
 }
 
-
 .border-black {
   border: thin solid #221D23;
 }
@@ -66,4 +65,9 @@ p {
 .balance {
   font-size: 1.8rem;
   color: #3E92CC;
+}
+
+.linechart-style {
+  font-family: 'Work Sans', sans-serif;
+  color: #221D23;
 }

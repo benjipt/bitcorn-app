@@ -10,7 +10,7 @@ export default class ChartCard extends Component {
                 </div>
                 <hr></hr>
                 <ResponsiveContainer width="100%" height={550}>
-                    <LineChart data={ this.props.data }>
+                    <LineChart data={ this.props.data } className="linechart-style" >
                         <XAxis dataKey="date" />
                         <YAxis />
                         <Tooltip />
