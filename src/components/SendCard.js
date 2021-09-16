@@ -1,72 +1,68 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 
 const baseURL = 'https://jobcoin.gemini.com/greyhound-abruptly/api/'
 
-export default class SendCard extends Component {
-    constructor(props) {
-        super(props)
+export default function SendCard({ address, getData }) {
 
-        this.state = {
-            toAddress: '',
-            amount: '',
-            nsfError: false
-        }
+    // STATE HOOKS
+    const [ nsfError, setNsfError ] = useState(false)
+    const [ inputValue, setInputValue ] = useState({
+        toAddress: '',
+        amount: ''
+    })
 
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
+    // Destructured properties of inputValue state hook
+    const { toAddress, amount } = inputValue
+
+    const handleChange = e => {
+        const { id, value } = e.currentTarget
+        setInputValue({ ...inputValue, [id]: value })
     }
 
-    handleChange(event) {
-        this.setState({ [event.currentTarget.id]: event.currentTarget.value })
-    }
-
-    handleSubmit(event) {
-        event.preventDefault()
+    const handleSubmit = e => {
+        e.preventDefault()
         fetch(baseURL + 'transactions', {
             method: 'POST',
             body: JSON.stringify({
-                fromAddress: this.props.address,
-                toAddress: this.state.toAddress,
-                amount: this.state.amount
+                fromAddress: address,
+                toAddress: toAddress,
+                amount: amount
             }),
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(res => {
             if (res.status === 422) {
-                this.setState({ nsfError: true })
+                setNsfError(true)
             } else {
-                this.setState({
+                setInputValue({
                     toAddress: '',
-                    amount: '',
-                    nsfError: false
+                    amount: ''
                 })
-                this.props.getData(this.props.address)
+                getData(address)
             }
         })
     }
 
-    render() {
-        return (
-            <div className="container mt-5 p-4 border-black rounded card-custom">
-                <div className="text-center">
-                    <h5>Send JobCoin</h5>
-                </div>
-                <hr></hr>
-                <form onSubmit={ this.handleSubmit }>
-                    <div className="mb-3">
-                        <label htmlFor="toAddress" className="form-label">Destination Address</label>
-                        <input onChange={ this.handleChange } type="text" className="form-control" id="toAddress" value={this.state.toAddress} />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="amount" className="form-label">Amount to Send</label>
-                        <input onChange={ this.handleChange } type="text" className="form-control" id="amount" value={this.state.amount} />
-                        { this.state.nsfError &&
-                            <div id="nsfError" className="form-text">You do not have enough funds to send this amount.</div> }
-                    </div>
-                    <button type="submit" className="btn btn-primary">Send</button>
-                </form>
+    return (
+        <div className="container mt-5 p-4 border-black rounded card-custom">
+            <div className="text-center">
+                <h5>Send JobCoin</h5>
             </div>
-        )
-    }
+            <hr></hr>
+            <form onSubmit={ handleSubmit }>
+                <div className="mb-3">
+                    <label htmlFor="toAddress" className="form-label">Destination Address</label>
+                    <input onChange={ handleChange } type="text" className="form-control" id="toAddress" value={ toAddress } />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="amount" className="form-label">Amount to Send</label>
+                    <input onChange={ handleChange } type="text" className="form-control" id="amount" value={ amount } />
+                    { nsfError &&
+                        <div id="nsfError" className="form-text">You do not have enough funds to send this amount.</div> }
+                </div>
+                <button type="submit" className="btn btn-primary">Send</button>
+            </form>
+        </div>
+    )
 }
