@@ -12,7 +12,7 @@ export default function App() {
   const [ balance, setBalance ] = useState('')
   const [ runningBalance, setRunningBalance ] = useState([])
 
-  // RETRIEVES DATA FROM JOBCOIN UI
+  // RETRIEVES ADDRESS DATA FROM API
   const getData = address => {
     fetch(baseURL + 'addresses/' + address)
       .then(data => { return data.json()}, err => console.log(err))
@@ -21,33 +21,30 @@ export default function App() {
         setIsLoggedIn(true)
         setLoggedInAddress(address)
         setBalance(balance)
-        const balanceData = shapeData(transactions)
-        setRunningBalance(balanceData)
+        createRunningBalance(transactions, address)
       }, err => console.log(err))
   }
-  
-  // SHAPES TRANSACTION DATA INTO BALANCE DATA FOR CHART ~~~~~>
-  const shapeData = transactions => {
+  // SHAPES DATA FOR BALANCE HISTORY CHART ~~~~~>
+  const createRunningBalance = (transactions, loggedInAddress) => {
     let currentBalance = 0
     let balanceArr = []
     for (let transaction of transactions) {
-      const { toAddress, amount, timestamp } = transaction
-      if (toAddress === loggedInAddress) {
-        currentBalance += Number(amount)
+      if (transaction.toAddress === loggedInAddress) {
+        currentBalance += Number(transaction.amount)
       } else {
-        currentBalance -= Number(amount)
+        currentBalance -= Number(transaction.amount)
       }
-      const plot = generatePlot(timestamp, currentBalance)
+      const plot = generatePlot(transaction, currentBalance)
       updateBalanceArr(plot, balanceArr)
     }
-    return balanceArr
+    setRunningBalance(balanceArr)
   }
-
-  const generatePlot = (timestamp, currentBalance) => {
-    const formattedDate = format(new Date(timestamp), 'yyyy-MM-dd')
+  // Formats dates for chart rendering
+  const generatePlot = (transaction, currentBalance) => {
+    const formattedDate = format(new Date(transaction.timestamp), 'yyyy-MM-dd')
     return { amount: currentBalance, date: formattedDate }
   }
-
+  // Ensures balance value from each day is latest balance
   const updateBalanceArr = (plot, balanceArr) => {
     const lastIndex = balanceArr.length - 1
     if (lastIndex > -1) {
@@ -60,12 +57,11 @@ export default function App() {
       balanceArr.push(plot)
     }
   }
-  // <~~~~~ SHAPES TRANSACTION DATA INTO BALANCE DATA FOR CHART
+  // <~~~~~ SHAPES DATA FOR BALANCE HISTORY CHART
 
-  // RESETS STATE UPON LOGOUT
   const handleLogout = () => {
     setIsLoggedIn(false)
-    setLoggedInAddress('')
+    setLoggedInAddress(false)
     setBalance('')
     setRunningBalance([])
   }
