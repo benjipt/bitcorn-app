@@ -14,13 +14,11 @@ export default function SendCard({ address, getData }) {
     // Destructured properties of inputValue state hook
     const { toAddress, amount } = inputValue
 
-    // UPDATES STATE VALUES OF FORM INPUTS
     const handleChange = e => {
         const { id, value } = e.currentTarget
         setInputValue({ ...inputValue, [id]: value })
     }
 
-    // POSTS TRANSACTION TO JOBCOIN API
     const handleSubmit = e => {
         e.preventDefault()
         fetch(baseURL + 'transactions', {
