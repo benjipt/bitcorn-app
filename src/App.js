@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { format } from 'date-fns'
 import SignInPage from './components/SignInPage'
 import JobCoinUI from './components/JobCoinUI'
@@ -12,6 +12,13 @@ export default function App() {
   const [ balance, setBalance ] = useState('')
   const [ runningBalance, setRunningBalance ] = useState([])
 
+  // PERSISTS STATE OF APPLICATION UPON REFRESH
+  useEffect(() => {
+    const persistedLoggedInAddress = localStorage.getItem('loggedInAddress')
+    getData(persistedLoggedInAddress)
+    // eslint-disable-next-line
+  }, [])
+
   // RETRIEVES ADDRESS DATA FROM API
   const getData = address => {
     fetch(baseURL + 'addresses/' + address)
@@ -22,6 +29,8 @@ export default function App() {
         setLoggedInAddress(address)
         setBalance(balance)
         createRunningBalance(transactions, address)
+        // DUPLICATES ADDRESS TO LOCAL STORAGE FOR PERSISTENT STATE UPON REFRESH
+        localStorage.setItem('loggedInAddress', address)
       }, err => console.log(err))
   }
   // SHAPES DATA FOR BALANCE HISTORY CHART ~~~~~>
@@ -61,9 +70,10 @@ export default function App() {
 
   const handleLogout = () => {
     setIsLoggedIn(false)
-    setLoggedInAddress(false)
+    setLoggedInAddress('')
     setBalance('')
     setRunningBalance([])
+    localStorage.clear()
   }
 
   return (
