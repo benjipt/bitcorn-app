@@ -14,7 +14,7 @@ export default function App() {
 
   // PERSISTS STATE OF APPLICATION UPON REFRESH
   useEffect(() => {
-    const persistedLoggedInAddress = localStorage.getItem('loggedInAddress')
+    const persistedLoggedInAddress = sessionStorage.getItem('loggedInAddress')
     getData(persistedLoggedInAddress)
     // eslint-disable-next-line
   }, [])
@@ -30,7 +30,7 @@ export default function App() {
         setBalance(balance)
         createRunningBalance(transactions, address)
         // DUPLICATES ADDRESS TO LOCAL STORAGE FOR PERSISTENT STATE UPON REFRESH
-        localStorage.setItem('loggedInAddress', address)
+        sessionStorage.setItem('loggedInAddress', address)
       }, err => console.log(err))
   }
   // SHAPES DATA FOR BALANCE HISTORY CHART ~~~~~>
