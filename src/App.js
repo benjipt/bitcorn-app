@@ -73,7 +73,7 @@ export default function App() {
     setLoggedInAddress('')
     setBalance('')
     setRunningBalance([])
-    localStorage.clear()
+    sessionStorage.clear()
   }
 
   return (
