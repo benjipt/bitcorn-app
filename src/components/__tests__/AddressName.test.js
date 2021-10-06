@@ -6,16 +6,20 @@ afterEach(() => {
     cleanup()
 })
 
-test('should render AddressName component with address prop', () => {
-    const address = 'Jilly'
-    render(<AddressName address={ address } />)
-    const AddressNameComponent = screen.getByTestId('AddressName-1')
-    expect(AddressNameComponent).toBeInTheDocument()
-    expect(AddressNameComponent).toHaveTextContent('Jilly')
-})
 
-test('matches snapshot', () => {
-    const address = 'Jilly'
-    const tree = renderer.create(<AddressName address={ address } />).toJSON()
-    expect(tree).toMatchSnapshot()
+describe('AddressName', () => {
+
+    test('should render AddressName component with address prop', () => {
+        const address = 'Jilly'
+        render(<AddressName address={ address } />)
+        const AddressNameComponent = screen.getByTestId('AddressName-1')
+        expect(AddressNameComponent).toBeInTheDocument()
+        expect(AddressNameComponent).toHaveTextContent('Jilly')
+    })
+    
+    test('matches snapshot', () => {
+        const address = 'Jilly'
+        const tree = renderer.create(<AddressName address={ address } />).toJSON()
+        expect(tree).toMatchSnapshot()
+    })
 })

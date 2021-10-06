@@ -6,13 +6,16 @@ afterEach(() => {
     cleanup()
 })
 
-test('should render SignOutButton component', () => {
-    render(<SignOutBtn />)
-    const SignOutBtnComponent = screen.getByTestId('SignOutBtn-1')
-    expect(SignOutBtnComponent).toBeInTheDocument()
-})
-
-test('matches snapshot', () => {
-    const tree = renderer.create(<SignOutBtn />).toJSON()
-    expect(tree).toMatchSnapshot()
+describe('SignOutBtn', () => {
+    
+    test('should render SignOutButton component', () => {
+        render(<SignOutBtn />)
+        const SignOutBtnComponent = screen.getByTestId('SignOutBtn-1')
+        expect(SignOutBtnComponent).toBeInTheDocument()
+    })
+    
+    test('matches snapshot', () => {
+        const tree = renderer.create(<SignOutBtn />).toJSON()
+        expect(tree).toMatchSnapshot()
+    })
 })
