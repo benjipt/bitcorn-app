@@ -16,6 +16,7 @@ describe('AppBar', () => {
         const SignOutBtnComponent = screen.getByTestId('SignOutBtn-1')
         expect(AppBarComponent).toBeInTheDocument()
         expect(AddressNameComponent).toBeInTheDocument()
+        expect(AddressNameComponent).toHaveTextContent('Jilly')
         expect(SignOutBtnComponent).toBeInTheDocument()
     })
 
