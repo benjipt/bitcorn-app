@@ -45,19 +45,19 @@ export default function SendCard({ address, getData }) {
     }
 
     return (
-        <div className="container mt-5 p-4 border-black rounded card-custom">
+        <div className="container mt-5 p-4 border-black rounded card-custom" data-testid="SendCard-1">
             <div className="text-center">
                 <h5>Send JobCoin</h5>
             </div>
             <hr></hr>
-            <form onSubmit={ handleSubmit }>
+            <form onSubmit={ handleSubmit } data-testid="SendCard-2">
                 <div className="mb-3">
                     <label htmlFor="toAddress" className="form-label">Destination Address</label>
-                    <input onChange={ handleChange } type="text" className="form-control" id="toAddress" value={ toAddress } />
+                    <input onChange={ handleChange } type="text" className="form-control" id="toAddress" data-testid="SendCard-input-1" value={ toAddress } />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="amount" className="form-label">Amount to Send</label>
-                    <input onChange={ handleChange } type="text" className="form-control" id="amount" value={ amount } />
+                    <input onChange={ handleChange } type="text" className="form-control" id="amount" data-testid="SendCard-input-2" value={ amount } />
                     { nsfError &&
                         <div id="nsfError" className="form-text">You do not have enough funds to send this amount.</div> }
                 </div>
