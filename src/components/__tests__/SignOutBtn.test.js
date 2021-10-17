@@ -1,4 +1,5 @@
-import { render, screen, cleanup, fireEvent } from '@testing-library/react'
+import { render, screen, cleanup } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import renderer from 'react-test-renderer'
 import SignOutBtn from '../SignOutBtn'
 
@@ -20,7 +21,7 @@ describe('SignOutBtn', () => {
         render(<SignOutBtn handleLogout={ handleLogout } />)
         const SignOutBtnComponent = screen.getByTestId('SignOutBtn-1')
         // Simulates click event and expects handleLogout to have been called.
-        fireEvent.click(SignOutBtnComponent)
+        userEvent.click(SignOutBtnComponent)
         expect(handleLogout).toHaveBeenCalled()
     })
     
