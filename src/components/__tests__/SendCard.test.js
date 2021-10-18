@@ -1,66 +1,54 @@
-import { render, screen, cleanup, fireEvent } from '@testing-library/react'
+import { render, cleanup, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import renderer from 'react-test-renderer'
 import SendCard from '../SendCard'
 
-afterEach(() => {
-    cleanup()
-})
 
 describe('SendCard', () => {
 
+    beforeEach(() => {
+        render(<SendCard/>)
+    })
+    
+    afterEach(() => {
+        cleanup()
+    })
+
     test('should render SendCard component', () => {
-        render(<SendCard/>)
-        const SendCardComponent = screen.getByTestId('SendCard-1')
-        expect(SendCardComponent).toBeInTheDocument()
+        screen.getByTestId('SendCard-1')
     })
 
-    // test('handleChange updates inputValue state', () => {
-    //     render(<SendCard/>)
-    //     const SendCardComponent = screen.getByTestId('SendCard-1')
-
-    //     // Accessing Input fields and staging input values
-    //     const toAddressInput = screen.getByTestId('SendCard-input-1')
-    //     const amountInput = screen.getByTestId('SendCard-input-2')
-    //     const toAddressValue = { target: { value: 'Bob' } }
-    //     const amountValue = { target: { value: '24.5' } }
-
-    //     // Setting input values via onChange
-    //     fireEvent.change(toAddressInput, toAddressValue)
-    //     fireEvent.change(amountInput, amountValue)
-
-    //     expect(SendCardComponent.inputValue).toBe({})
-    // })
-
-    test('handleChange updates controlled input values', () => {
-        // Mounting and accessing the SendCard component
-        render(<SendCard/>)
-
-        // Accessing Input fields and staging input values
-        const toAddressInput = screen.getByTestId('SendCard-input-1')
-        const amountInput = screen.getByTestId('SendCard-input-2')
-        const toAddressValue = { target: { value: 'Bob' } }
-        const amountValue = { target: { value: '24.5' } }
-
-        // Setting and testing input values
-        fireEvent.change(toAddressInput, toAddressValue)
-        fireEvent.change(amountInput, amountValue)
-        expect(toAddressInput.value).toBe('Bob')
-        expect(amountInput.value).toBe('24.5')
+    describe('Form inputs', () => {
+        
+        test('should render input fields', () => {
+            screen.getByTestId('SendCard-input-1')
+            screen.getByTestId('SendCard-input-2')
+        })
+    
+        test('handleChange updates controlled input values', () => {
+            // Accessing Input fields
+            const toAddressInput = screen.getByTestId('SendCard-input-1')
+            const amountInput = screen.getByTestId('SendCard-input-2')
+            // Typing input values
+            userEvent.type(toAddressInput, 'Bob')
+            userEvent.type(amountInput, '24.5')
+            // Tests for expected input values
+            expect(toAddressInput).toHaveValue('Bob')
+            expect(amountInput).toHaveValue('24.5')
+        })
     })
 
-    // test('handleSubmit is called when completed form is submitted', () => {
-    //     // Mounting and accessing the SendCard component
-    //     render(<SendCard/>)
+    describe('Form submit', () => {
 
-    //     // Accessing input fields and staging values
-    //     const toAddressInput = screen.getByTestId('SendCard-input-1')
-    //     const amountInput = screen.getByTestId('SendCard-input-2')
-    //     const toAddressValue = { target: { value: 'Bob' } }
-    //     const amountValue = { target: { value: '24.5' } }
+        test('should render submit button', () => {
+            screen.getByText('Send')
+        })
 
-    //     // Setting and testing input values via OnChange
-    //     fireEvent.change(toAddressInput, toAddressValue)
-    //     fireEvent.change(amountInput, amountValue)
+    })
 
-    //     // <~~~ Finish this
-    // })
+    test('matches snapshot', () => {
+        const tree = renderer.create(<SendCard/>).toJSON()
+        expect(tree).toMatchSnapshot()
+    })
+
 })

@@ -1,4 +1,5 @@
-import { render, screen, cleanup, fireEvent } from '@testing-library/react'
+import { render, screen, cleanup } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import renderer from 'react-test-renderer'
 import AppBar from '../AppBar'
 
@@ -32,7 +33,7 @@ describe('AppBar', () => {
         const SignOutBtnComponent = screen.getByTestId('SignOutBtn-1')
         // Tests for expected prop behavior
         expect(AddressNameComponent).toHaveTextContent('Jilly')
-        fireEvent.click(SignOutBtnComponent)
+        userEvent.click(SignOutBtnComponent)
         expect(handleLogout).toHaveBeenCalled()
     })
 
