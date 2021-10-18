@@ -3,16 +3,13 @@ import userEvent from '@testing-library/user-event'
 import renderer from 'react-test-renderer'
 import AppBar from '../AppBar'
 
-afterEach(() => {
-    cleanup()
-})
-
 describe('AppBar', () => {
+    afterEach(cleanup)
 
     test('should render AppBar with AddressName and SignOutBtn', () => {
         // Renders Appbar and child components
         render(<AppBar />)
-        // Grabs components from rendered tree
+        // Grabs components from render
         const AppBarComponent = screen.getByTestId('AppBar-1')
         const AddressNameComponent = screen.getByTestId('AddressName-1')
         const SignOutBtnComponent = screen.getByTestId('SignOutBtn-1')
@@ -28,7 +25,7 @@ describe('AppBar', () => {
         const handleLogout = jest.fn()
         // Renders Appbar and child components
         render(<AppBar address={ address } handleLogout={ handleLogout } />)
-        // Grabs components from rendered tree
+        // Grabs components from render
         const AddressNameComponent = screen.getByTestId('AddressName-1')
         const SignOutBtnComponent = screen.getByTestId('SignOutBtn-1')
         // Tests for expected prop behavior

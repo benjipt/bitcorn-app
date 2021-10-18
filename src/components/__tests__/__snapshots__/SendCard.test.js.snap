@@ -27,7 +27,7 @@ exports[`SendCard matches snapshot 1`] = `
       </label>
       <input
         className="form-control"
-        data-testid="SendCard-input-1"
+        data-testid="input-1"
         id="toAddress"
         onChange={[Function]}
         type="text"
@@ -45,7 +45,7 @@ exports[`SendCard matches snapshot 1`] = `
       </label>
       <input
         className="form-control"
-        data-testid="SendCard-input-2"
+        data-testid="input-2"
         id="amount"
         onChange={[Function]}
         type="text"
@@ -54,7 +54,7 @@ exports[`SendCard matches snapshot 1`] = `
     </div>
     <button
       className="btn btn-primary"
-      data-testid="SendCard-submit-1"
+      data-testid="submit-1"
       type="submit"
     >
       Send

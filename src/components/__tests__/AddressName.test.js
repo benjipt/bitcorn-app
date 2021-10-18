@@ -2,12 +2,10 @@ import { render, screen, cleanup } from '@testing-library/react'
 import renderer from 'react-test-renderer'
 import AddressName from '../AddressName'
 
-afterEach(() => {
-    cleanup()
-})
 
 
-describe('AddressName', () => {
+describe('AddressName', () => { 
+    afterEach(cleanup)
 
     test('should render component', () => {
         render(<AddressName/>)
