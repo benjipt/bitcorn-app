@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App matches snapshot 1`] = `
+<div
+  data-testid="App-1"
+>
+  <div
+    className="container text-center mt-5"
+  >
+    <h1>
+      JOBCOIN
+    </h1>
+    <div
+      className="mt-5 p-4 border-black rounded sign-in"
+    >
+      <p>
+        Welcome! Please sign in with your JobCoin address
+      </p>
+      <hr />
+      <form
+        className="mt-4"
+        onSubmit={[Function]}
+      >
+        <div
+          className="row g-3 align-items-center justify-content-center"
+        >
+          <div
+            className="col-auto"
+          >
+            <label
+              className="form-label visually-hidden"
+              htmlFor="address"
+            >
+              Address
+            </label>
+          </div>
+          <div
+            className="col-auto"
+          >
+            <input
+              className="form-control"
+              id="address"
+              onChange={[Function]}
+              placeholder="Jilly"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="col-auto"
+          >
+            <button
+              className="btn btn-primary"
+              type="submit"
+            >
+              Sign In
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+`;

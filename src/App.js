@@ -77,7 +77,7 @@ export default function App() {
   }
 
   return (
-    <div>
+    <div data-testid="App-1">
       { !isLoggedIn && 
         <SignInPage
           getData={ getData } /> }
