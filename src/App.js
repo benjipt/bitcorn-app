@@ -15,7 +15,9 @@ export default function App() {
   // PERSISTS STATE OF APPLICATION UPON REFRESH
   useEffect(() => {
     const persistedLoggedInAddress = sessionStorage.getItem('loggedInAddress')
-    getData(persistedLoggedInAddress)
+    if (persistedLoggedInAddress && persistedLoggedInAddress !== 'null') {
+      getData(persistedLoggedInAddress)
+    }
     // eslint-disable-next-line
   }, [])
 
