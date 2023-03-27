@@ -1,8 +1,13 @@
-import React, { useState } from 'react'
+import { useState, ChangeEvent, SyntheticEvent } from 'react'
 
 const baseURL = 'https://jobcoin.gemini.com/greyhound-abruptly/api/'
 
-export default function SendCard({ address, getData }) {
+interface SendCardProps {
+  address: string
+  getData: (address: string) => void
+}
+
+export default function SendCard({ address, getData }: SendCardProps) {
 
     // STATE HOOKS
     const [ nsfError, setNsfError ] = useState(false)
@@ -14,12 +19,12 @@ export default function SendCard({ address, getData }) {
     // Destructured properties of inputValue state hook
     const { toAddress, amount } = inputValue
 
-    const handleChange = e => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.currentTarget
         setInputValue({ ...inputValue, [id]: value })
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault()
         fetch(baseURL + 'transactions', {
             method: 'POST',
