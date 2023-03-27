@@ -1,7 +1,8 @@
 import { Tooltip, XAxis, YAxis, ResponsiveContainer, LineChart, Line } from 'recharts'
+import { BalancePlot } from '../types'
 
 interface ChartCardProps {
-  data: []
+  data: BalancePlot[]
 }
 
 export default function ChartCard({ data }: ChartCardProps) {
