@@ -8,3 +8,8 @@ export interface Response {
   balance: string;
   transactions: Transaction[];
 }
+
+export type BalancePlot = {
+  amount: number;
+  date: string;
+}
