@@ -1,17 +1,21 @@
-import React, { useState } from 'react'
+import { ChangeEvent, SyntheticEvent, useState } from 'react'
 
-export default function SignInPage({ getData }) {
+interface SignInPageProps {
+  getData: (address: string) => void
+}
+
+export default function SignInPage({ getData }: SignInPageProps) {
 
     // STATE HOOKS
     const [ addressInput, setAddressInput ] = useState('')
     const [ submitError, setSubmitError ] = useState(false)
 
-    const handleChange = e => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { value } = e.currentTarget
         setAddressInput(value)
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (!addressInput) {
             setSubmitError(true)
