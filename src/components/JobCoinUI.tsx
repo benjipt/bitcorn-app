@@ -1,10 +1,17 @@
-import React from 'react'
 import AppBar from './AppBar'
 import BalanceCard from './BalanceCard'
 import SendCard from './SendCard'
 import ChartCard from './ChartCard'
 
-export default function JobCoinUI({ address, handleLogout, balance, getData, data }) {
+interface JobCoinUIProps {
+  address: string;
+  handleLogout: () => void;
+  balance: string;
+  getData: (address: string) => void;
+  data: [];
+}
+
+export default function JobCoinUI({ address, handleLogout, balance, getData, data }: JobCoinUIProps) {
     return (
         <div>
             <AppBar 
