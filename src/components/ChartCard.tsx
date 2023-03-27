@@ -1,7 +1,10 @@
-import React from 'react'
 import { Tooltip, XAxis, YAxis, ResponsiveContainer, LineChart, Line } from 'recharts'
 
-export default function ChartCard({ data }) {
+interface ChartCardProps {
+  data: []
+}
+
+export default function ChartCard({ data }: ChartCardProps) {
     return (
         <div className="container mt-5 p-4 border-black rounded card-custom" data-testid="ChartCard-1">
             <div className="text-center">
