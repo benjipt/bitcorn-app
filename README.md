@@ -27,3 +27,4 @@ Complete w/ improvement opportunities:
 
 ## Changelog
 - Converted from JS to Typescript (March 27, 2023)
+- Converted app bundler from webpack to vite (March 27, 2023)
