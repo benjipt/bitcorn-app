@@ -2,7 +2,7 @@ export type Transaction = {
   amount: string; // float
   timestamp: string; // ISO8601 Date
   toAddress: string;
-}
+};
 
 export interface Response {
   balance: string;
@@ -12,4 +12,4 @@ export interface Response {
 export type BalancePlot = {
   amount: number;
   date: string;
-}
+};
