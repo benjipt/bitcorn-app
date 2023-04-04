@@ -5,6 +5,7 @@ exports[`SignOutBtn matches snapshot 1`] = `
   <button
     className="btn btn-outline-dark"
     data-testid="SignOutBtn-1"
+    onClick={[Function]}
   >
     Sign Out
   </button>

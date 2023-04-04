@@ -7,7 +7,7 @@ describe('BalanceCard', () => {
 
     test('should render BalanceCard component', () => {
         // Renders BalanceCard component
-        render(<BalanceCard/>)
+        render(<BalanceCard balance=''/>)
         // Grabs component from render
         const BalanceCardComponent = screen.getByTestId('BalanceCard-1')
         // Tests for expected component

@@ -2,13 +2,11 @@ import { render, screen, cleanup } from '@testing-library/react'
 import renderer from 'react-test-renderer'
 import AddressName from '../AddressName'
 
-
-
 describe('AddressName', () => { 
     afterEach(cleanup)
 
     test('should render component', () => {
-        render(<AddressName/>)
+        render(<AddressName address=''/>)
         const AddressNameComponent = screen.getByTestId('AddressName-1')
         expect(AddressNameComponent).toBeInTheDocument()
     })

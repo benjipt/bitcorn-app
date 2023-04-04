@@ -1,5 +1,4 @@
 import { render, cleanup, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import renderer from 'react-test-renderer'
 import SendCard from '../SendCard'
 
@@ -9,7 +8,7 @@ describe('SendCard', () => {
 
     test('should render SendCard component', () => {
         // Renders SendCard component
-        render(<SendCard/>)
+        render(<SendCard address='' getData={() => {}}/>)
         // Grabs SendCard component from render
         const SendCardComponent = screen.getByTestId('SendCard-1')
         // Tests for expected component
@@ -18,7 +17,7 @@ describe('SendCard', () => {
 
     test('matches snapshot', () => {
         // Render component tree
-        const tree = renderer.create(<SendCard/>).toJSON()
+        const tree = renderer.create(<SendCard address='' getData={() => {}}/>).toJSON()
         // Tests for matching snapshot
         expect(tree).toMatchSnapshot()
     })

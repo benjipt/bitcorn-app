@@ -1,5 +1,6 @@
 import { Tooltip, XAxis, YAxis, ResponsiveContainer, LineChart, Line } from 'recharts'
 import { BalancePlot } from '../types'
+import ErrorBoundary from './ErrorBoundary'
 
 interface ChartCardProps {
   data: BalancePlot[]
@@ -12,14 +13,16 @@ export default function ChartCard({ data }: ChartCardProps) {
                 <h5>Balance History</h5>
             </div>
             <hr></hr>
-            <ResponsiveContainer width="100%" height={550}>
-                <LineChart data={ data } className="linechart-style" >
-                    <XAxis dataKey="date" />
-                    <YAxis />
-                    <Tooltip />
-                    <Line type="monotone" dataKey="amount" stroke="#FF3366" strokeWidth={4} />
-                </LineChart>
-            </ResponsiveContainer>
+            <ErrorBoundary>
+              <ResponsiveContainer width="100%" height={550}>
+                  <LineChart data={ data } className="linechart-style" >
+                      <XAxis dataKey="date" />
+                      <YAxis />
+                      <Tooltip />
+                      <Line type="monotone" dataKey="amount" stroke="#FF3366" strokeWidth={4} />
+                  </LineChart>
+              </ResponsiveContainer>
+            </ErrorBoundary>
         </div>
     )
 }
