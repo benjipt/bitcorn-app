@@ -15,9 +15,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "vite",
+    "dev": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview",
+    "preview": "vite preview",
     "test": "jest",
     "prepare": "husky install"
   },
