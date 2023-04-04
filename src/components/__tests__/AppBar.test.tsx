@@ -1,6 +1,5 @@
-import { render, screen, cleanup } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import renderer from 'react-test-renderer'
+import { render, screen, cleanup, fireEvent } from '@testing-library/react'
+import renderer, { ReactTestRenderer, act } from 'react-test-renderer'
 import AppBar from '../AppBar'
 
 describe('AppBar', () => {
@@ -8,7 +7,7 @@ describe('AppBar', () => {
 
     test('should render AppBar with AddressName and SignOutBtn', () => {
         // Renders Appbar and child components
-        render(<AppBar />)
+        render(<AppBar address='' handleLogout={() => {}} />)
         // Grabs components from render
         const AppBarComponent = screen.getByTestId('AppBar-1')
         const AddressNameComponent = screen.getByTestId('AddressName-1')
@@ -30,12 +29,15 @@ describe('AppBar', () => {
         const SignOutBtnComponent = screen.getByTestId('SignOutBtn-1')
         // Tests for expected prop behavior
         expect(AddressNameComponent).toHaveTextContent('Jilly')
-        userEvent.click(SignOutBtnComponent)
+        fireEvent.click(SignOutBtnComponent)
         expect(handleLogout).toHaveBeenCalled()
     })
 
     test('matches snapshot', () => {
-        const tree = renderer.create(<AppBar />).toJSON()
-        expect(tree).toMatchSnapshot()
+        let tree: ReactTestRenderer | undefined;
+        act(() => {
+          tree = renderer.create(<AppBar address='' handleLogout={() => {}} />)
+        })
+        expect(tree!.toJSON()).toMatchSnapshot()
     })
 })
