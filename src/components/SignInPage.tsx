@@ -1,10 +1,10 @@
-import { ChangeEvent, SyntheticEvent, useState } from 'react';
+import React, { ChangeEvent, SyntheticEvent, useState } from 'react';
 
 interface SignInPageProps {
   getData: (address: string) => void;
 }
 
-export default function SignInPage({ getData }: SignInPageProps) {
+const SignInPage = ({ getData }: SignInPageProps) => {
   // STATE HOOKS
   const [addressInput, setAddressInput] = useState('');
   const [submitError, setSubmitError] = useState(false);
@@ -61,4 +61,6 @@ export default function SignInPage({ getData }: SignInPageProps) {
       </div>
     </div>
   );
-}
+};
+
+export default React.memo(SignInPage);

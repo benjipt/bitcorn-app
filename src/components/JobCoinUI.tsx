@@ -1,3 +1,4 @@
+import React from 'react';
 import AppBar from './AppBar';
 import BalanceCard from './BalanceCard';
 import SendCard from './SendCard';
@@ -12,13 +13,13 @@ interface JobCoinUIProps {
   data: BalancePlot[];
 }
 
-export default function JobCoinUI({
+const JobCoinUI = ({
   address,
   handleLogout,
   balance,
   getData,
   data,
-}: JobCoinUIProps) {
+}: JobCoinUIProps) => {
   return (
     <div>
       <AppBar address={address} handleLogout={handleLogout} />
@@ -35,4 +36,6 @@ export default function JobCoinUI({
       </div>
     </div>
   );
-}
+};
+
+export default React.memo(JobCoinUI);
