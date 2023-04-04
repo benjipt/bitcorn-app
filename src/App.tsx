@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { format } from 'date-fns';
 import SignInPage from './components/SignInPage';
 import JobCoinUI from './components/JobCoinUI';
@@ -23,7 +23,7 @@ export default function App() {
   }, []);
 
   // RETRIEVES ADDRESS DATA FROM API
-  const getData = (address: string | null) => {
+  const getData = useCallback((address: string | null) => {
     if (address === null) return;
     fetch(baseURL + 'addresses/' + address)
       .then(
@@ -44,7 +44,7 @@ export default function App() {
         },
         err => console.log(err)
       );
-  };
+  }, []);
   // SHAPES DATA FOR BALANCE HISTORY CHART ~~~~~>
   const createRunningBalance = (
     transactions: Transaction[],
@@ -64,32 +64,41 @@ export default function App() {
     setRunningBalance(balanceArr);
   };
   // Formats dates for chart rendering
-  const generatePlot = (transaction: Transaction, currentBalance: number) => {
-    const formattedDate = format(new Date(transaction.timestamp), 'yyyy-MM-dd');
-    return { amount: currentBalance, date: formattedDate };
-  };
+  const generatePlot = useCallback(
+    (transaction: Transaction, currentBalance: number) => {
+      const formattedDate = format(
+        new Date(transaction.timestamp),
+        'yyyy-MM-dd'
+      );
+      return { amount: currentBalance, date: formattedDate };
+    },
+    []
+  );
   // Ensures balance value from each day is latest balance
-  const updateBalanceArr = (plot: BalancePlot, balanceArr: BalancePlot[]) => {
-    const lastIndex = balanceArr.length - 1;
-    if (lastIndex > -1) {
-      if (plot.date === balanceArr[lastIndex].date) {
-        balanceArr.splice(lastIndex, 1, plot);
+  const updateBalanceArr = useCallback(
+    (plot: BalancePlot, balanceArr: BalancePlot[]) => {
+      const lastIndex = balanceArr.length - 1;
+      if (lastIndex > -1) {
+        if (plot.date === balanceArr[lastIndex].date) {
+          balanceArr.splice(lastIndex, 1, plot);
+        } else {
+          balanceArr.push(plot);
+        }
       } else {
         balanceArr.push(plot);
       }
-    } else {
-      balanceArr.push(plot);
-    }
-  };
+    },
+    []
+  );
   // <~~~~~ SHAPES DATA FOR BALANCE HISTORY CHART
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     setIsLoggedIn(false);
     setLoggedInAddress('');
     setBalance('');
     setRunningBalance([]);
     sessionStorage.clear();
-  };
+  }, []);
 
   return (
     <div data-testid='App-1'>
