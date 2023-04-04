@@ -15,61 +15,61 @@ code {
 }
 
 .body-style {
-  background-color: #F9DC5C;
+  background-color: #f9dc5c;
   font-family: 'Work Sans', sans-serif;
-  color: #221D23;
+  color: #221d23;
 }
 
 h1 {
   font-family: 'Press Start 2P', cursive;
   font-size: 56px;
-  color: #221D23;
+  color: #221d23;
 }
 
 h4 {
   font-family: 'Space Mono', monospace;
-  color: #221D23;
+  color: #221d23;
 }
 
 p {
   font-family: 'Space Mono', monospace;
-  color: #221D23;
+  color: #221d23;
 }
 
 .border-black {
-  border: thin solid #221D23;
+  border: thin solid #221d23;
 }
 
 .sign-in {
-  background-color: #F5F3F6;
+  background-color: #f5f3f6;
 }
 
 .app-bar {
-  background-color: #F5F3F6;
+  background-color: #f5f3f6;
 }
 
 .app-bar-border {
-  border-bottom: thin solid #221D23;
+  border-bottom: thin solid #221d23;
 }
 
 .btn-outline-dark:hover {
-  color: #F5F3F6;
-  background-color: #221D23;
+  color: #f5f3f6;
+  background-color: #221d23;
 }
 
 .card-custom {
-  background-color: #F5F3F6;
-  box-shadow: .1rem .1rem #6C5C70;
+  background-color: #f5f3f6;
+  box-shadow: 0.1rem 0.1rem #6c5c70;
 }
 
 .balance {
   font-size: 1.8rem;
-  color: #3E92CC;
+  color: #3e92cc;
 }
 
 .linechart-style {
   font-family: 'Work Sans', sans-serif;
-  color: #221D23;
+  color: #221d23;
 }
 
 @media screen and (max-width: 850px) {
