@@ -1,12 +1,19 @@
 import { useState, ChangeEvent, SyntheticEvent } from 'react';
-import { postTransaction } from '../utils/api';
-
 interface SendCardProps {
   address: string;
   getData: (address: string) => void;
+  postTransaction: (
+    fromAddress: string,
+    toAddress: string,
+    amount: string
+  ) => Promise<{ status: number }>;
 }
 
-export default function SendCard({ address, getData }: SendCardProps) {
+export default function SendCard({
+  address,
+  getData,
+  postTransaction,
+}: SendCardProps) {
   interface InputValue {
     toAddress: string;
     amount: string;
