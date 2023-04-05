@@ -1,6 +1,5 @@
 import { useState, ChangeEvent, SyntheticEvent } from 'react';
-
-const baseURL = 'https://jobcoin.gemini.com/greyhound-abruptly/api/';
+import { postTransaction } from '../utils/api';
 
 interface SendCardProps {
   address: string;
@@ -8,15 +7,16 @@ interface SendCardProps {
 }
 
 export default function SendCard({ address, getData }: SendCardProps) {
+  interface InputValue {
+    toAddress: string;
+    amount: string;
+  }
   // STATE HOOKS
   const [nsfError, setNsfError] = useState(false);
-  const [inputValue, setInputValue] = useState({
+  const [inputValue, setInputValue] = useState<InputValue>({
     toAddress: '',
     amount: '',
   });
-
-  // Destructured properties of inputValue state hook
-  const { toAddress, amount } = inputValue;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.currentTarget;
@@ -25,17 +25,8 @@ export default function SendCard({ address, getData }: SendCardProps) {
 
   const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    fetch(baseURL + 'transactions', {
-      method: 'POST',
-      body: JSON.stringify({
-        fromAddress: address,
-        toAddress: toAddress,
-        amount: amount,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then(res => {
+    const { toAddress, amount } = inputValue;
+    postTransaction(address, toAddress, amount).then(res => {
       if (res.status === 422) {
         setNsfError(true);
       } else {
