@@ -2,8 +2,6 @@ import { useState, useEffect, useCallback } from 'react';
 import { format } from 'date-fns';
 import { BalancePlot, Response, Transaction } from '../types';
 
-const BASE_URL = 'https://jobcoin.gemini.com/greyhound-abruptly/api/';
-
 export function useJobCoinData() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loggedInAddress, setLoggedInAddress] = useState('');
@@ -21,7 +19,7 @@ export function useJobCoinData() {
   // Fetch address data from API and update state
   const getData = useCallback((address: string | null) => {
     if (address === null) return;
-    fetch(BASE_URL + 'addresses/' + address)
+    fetch(`{$BASE_URL}/addresses/${address}`)
       .then(
         data => {
           return data.json();
