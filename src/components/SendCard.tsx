@@ -1,7 +1,5 @@
 import { useState, ChangeEvent, SyntheticEvent } from 'react';
 
-const baseURL = 'https://jobcoin.gemini.com/greyhound-abruptly/api/';
-
 interface SendCardProps {
   address: string;
   getData: (address: string) => void;
@@ -25,7 +23,7 @@ export default function SendCard({ address, getData }: SendCardProps) {
 
   const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    fetch(baseURL + 'transactions', {
+    fetch(`${import.meta.env.BASE_URL}/transactions`, {
       method: 'POST',
       body: JSON.stringify({
         fromAddress: address,
