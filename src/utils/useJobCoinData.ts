@@ -1,8 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { format } from 'date-fns';
 import { BalancePlot, Response, Transaction } from '../types';
-
-const BASE_URL = 'https://jobcoin.gemini.com/greyhound-abruptly/api/';
+import { BASE_URL } from './env';
 
 export function useJobCoinData() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

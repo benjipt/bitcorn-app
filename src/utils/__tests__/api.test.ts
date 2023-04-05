@@ -1,7 +1,6 @@
-import { postTransaction } from '../api';
 import fetchMock from 'fetch-mock';
-
-const baseURL = 'https://jobcoin.gemini.com/greyhound-abruptly/api/';
+import { postTransaction } from '../api';
+import { BASE_URL } from '../env';
 
 describe('postTransaction', () => {
   afterEach(() => {
@@ -11,7 +10,7 @@ describe('postTransaction', () => {
   test('should call the API with the correct parameters and return a response', async () => {
     // Mock the fetch function with fetchMock
     fetchMock.post(
-      `${baseURL}transactions`,
+      `${BASE_URL}transactions`,
       { status: 200 },
       {
         headers: { 'Content-Type': 'application/json' },
@@ -27,7 +26,7 @@ describe('postTransaction', () => {
     const response = await postTransaction('testFrom', 'testTo', '10');
 
     expect(fetchMock.called()).toBe(true);
-    expect(fetchMock.lastUrl()).toBe(`${baseURL}transactions`);
+    expect(fetchMock.lastUrl()).toBe(`${BASE_URL}transactions`);
     expect(fetchMock.lastOptions()).toEqual({
       method: 'POST',
       body: JSON.stringify({
