@@ -23,10 +23,11 @@ export default function SendCard({ address, getData }: SendCardProps) {
     setInputValue({ ...inputValue, [id]: value });
   };
 
-  const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
+  const { toAddress, amount } = inputValue;
+  const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { toAddress, amount } = inputValue;
-    postTransaction(address, toAddress, amount).then(res => {
+    try {
+      const res = await postTransaction(address, toAddress, amount);
       if (res.status === 422) {
         setNsfError(true);
       } else {
@@ -36,7 +37,10 @@ export default function SendCard({ address, getData }: SendCardProps) {
         });
         getData(address);
       }
-    });
+    } catch (error) {
+      // Handle errors, such as network issues or API errors
+      console.error('Error submitting transaction:', error);
+    }
   };
 
   return (
