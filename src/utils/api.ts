@@ -1,17 +1,16 @@
+import { BASE_URL } from './env';
 export type PostTransactionType = (
   fromAddress: string,
   toAddress: string,
   amount: string
 ) => Promise<Response>;
 
-const baseURL = 'https://jobcoin.gemini.com/greyhound-abruptly/api/';
-
 export const postTransaction: PostTransactionType = (
   fromAddress,
   toAddress,
   amount
 ) => {
-  return fetch(baseURL + 'transactions', {
+  return fetch(BASE_URL + 'transactions', {
     method: 'POST',
     body: JSON.stringify({ fromAddress, toAddress, amount }),
     headers: {
