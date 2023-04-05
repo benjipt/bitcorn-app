@@ -19,7 +19,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "jest",
-    "prepare": "husky install"
+    "test:ci": "jest --no-watchAll",
+    "prepare": "husky install",
+    "ci": "npm run test:ci && tsc && vite build"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
