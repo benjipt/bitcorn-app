@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
-import { useJobCoinData } from '../useJobCoinData';
+import { useBitcornData } from '../useBitcornData';
 import fetchMock from 'jest-fetch-mock';
 
 // Set up the fetch mock
@@ -12,7 +12,7 @@ afterEach(() => {
   fetchMock.resetMocks();
 });
 
-describe('useJobCoinData', () => {
+describe('useBitcornData', () => {
   test('should load persisted logged in address on mount', async () => {
     // Arrange
     sessionStorage.setItem('loggedInAddress', 'test-address');
@@ -29,7 +29,7 @@ describe('useJobCoinData', () => {
     fetchMock.mockResponseOnce(JSON.stringify(mockResponse));
 
     // Act
-    const { result, waitForNextUpdate } = renderHook(() => useJobCoinData());
+    const { result, waitForNextUpdate } = renderHook(() => useBitcornData());
 
     // Assert
     await waitForNextUpdate();

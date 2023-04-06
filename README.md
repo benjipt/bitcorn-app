@@ -1,4 +1,4 @@
-# JOBCOIN
+# BITCORN
 
 ## Table of contents
 
@@ -10,7 +10,7 @@
 
 ## General info
 
-A simple sign-on screen and user interface for a fake cryptocurrency called JobCoin. Built with React, Typescript, Bootstrap, and D3 (Recharts). Take home project for Gemini Front-end Engineer interview.
+A simple sign-on screen and user interface for a cryptocurrency called Bitcorn. Built with React, Typescript, Bootstrap, and D3 (Recharts). Initially assigned as a take home project for Frontend Engineer interview at Gemini, however I've made some upgrades since initially completed.
 
 ## Launch
 
@@ -20,6 +20,7 @@ View [here](https://jobcoin-1c304e.netlify.app/)
 
 - React
 - Typescript
+- Vite
 - Bootstrap
 - D3 (Recharts)
 - date-fns

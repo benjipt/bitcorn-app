@@ -25,9 +25,9 @@ const SignInPage = ({ getData }: SignInPageProps) => {
 
   return (
     <div className='container text-center mt-5'>
-      <h1>JOBCOIN</h1>
+      <h1>BITCORN</h1>
       <div className='mt-5 p-4 border-black rounded sign-in'>
-        <p>Welcome! Please sign in with your JobCoin address</p>
+        <p>Welcome! Please sign in with your Bitcorn address</p>
         <hr></hr>
         <form onSubmit={handleSubmit} className='mt-4'>
           <div className='row g-3 align-items-center justify-content-center'>

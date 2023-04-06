@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import { BalancePlot, Response, Transaction } from '../types';
 import { BASE_URL } from './env';
 
-export function useJobCoinData() {
+export function useBitcornData() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loggedInAddress, setLoggedInAddress] = useState('');
   const [balance, setBalance] = useState('');
