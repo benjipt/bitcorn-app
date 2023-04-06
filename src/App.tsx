@@ -1,6 +1,6 @@
 import SignInPage from './components/SignInPage';
-import JobCoinUI from './components/JobCoinUI';
-import { useJobCoinData } from './utils/useJobCoinData';
+import BitcornUI from './components/BitcornUI';
+import { useBitcornData } from './utils/useBitcornData';
 
 export default function App() {
   const {
@@ -10,14 +10,14 @@ export default function App() {
     runningBalance,
     getData,
     handleLogout,
-  } = useJobCoinData();
+  } = useBitcornData();
 
   return (
     <div data-testid='App-1'>
       {!isLoggedIn && <SignInPage getData={getData} />}
 
       {isLoggedIn && (
-        <JobCoinUI
+        <BitcornUI
           handleLogout={handleLogout}
           address={loggedInAddress}
           balance={balance}

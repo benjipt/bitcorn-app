@@ -6,7 +6,7 @@ exports[`BalanceCard matches snapshot 1`] = `
   data-testid="BalanceCard-1"
 >
   <h5>
-    JobCoin Balance
+    Bitcorn Balance
   </h5>
   <hr />
   <p
