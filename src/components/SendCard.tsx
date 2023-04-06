@@ -55,7 +55,7 @@ export default function SendCard({
       className='container mt-5 p-4 border-black rounded card-custom'
       data-testid='SendCard-1'>
       <div className='text-center'>
-        <h5>Send JobCoin</h5>
+        <h5>Send Bitcorn</h5>
       </div>
       <hr></hr>
       <form onSubmit={handleSubmit}>

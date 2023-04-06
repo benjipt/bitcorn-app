@@ -6,7 +6,7 @@ import ChartCard from './ChartCard';
 import { BalancePlot } from '../types';
 import { postTransaction } from '../utils/api';
 
-interface JobCoinUIProps {
+interface BitcornUIProps {
   address: string;
   handleLogout: () => void;
   balance: string;
@@ -14,13 +14,13 @@ interface JobCoinUIProps {
   data: BalancePlot[];
 }
 
-const JobCoinUI = ({
+const BitcornUI = ({
   address,
   handleLogout,
   balance,
   getData,
   data,
-}: JobCoinUIProps) => {
+}: BitcornUIProps) => {
   return (
     <div>
       <AppBar address={address} handleLogout={handleLogout} />
@@ -43,4 +43,4 @@ const JobCoinUI = ({
   );
 };
 
-export default React.memo(JobCoinUI);
+export default React.memo(BitcornUI);
