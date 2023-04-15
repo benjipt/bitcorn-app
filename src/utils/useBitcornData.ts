@@ -1,6 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
 import { format } from 'date-fns';
-import { BalancePlot, Response, Transaction } from '../types';
+import {
+  BalancePlot,
+  ErrorMessageState,
+  Response,
+  Transaction,
+} from '../types';
 import { BASE_URL } from './env';
 
 export function useBitcornData() {
@@ -8,6 +13,7 @@ export function useBitcornData() {
   const [loggedInAddress, setLoggedInAddress] = useState('');
   const [balance, setBalance] = useState('');
   const [runningBalance, setRunningBalance] = useState<BalancePlot[]>([]);
+  const [errorMessage, setErrorMessage] = useState<ErrorMessageState>(null);
 
   // Load persisted logged in address on component mount (if available)
   useEffect(() => {
@@ -25,7 +31,12 @@ export function useBitcornData() {
         data => {
           return data.json();
         },
-        err => console.log(err)
+        err => {
+          console.log(err);
+          setErrorMessage(
+            'Failed to fetch data. Gemini API may currently be unavailable. Maintainer is aware of the issue.'
+          );
+        }
       )
       .then(
         (parsedData: Response) => {
@@ -37,7 +48,12 @@ export function useBitcornData() {
           // DUPLICATES ADDRESS TO LOCAL STORAGE FOR PERSISTENT STATE UPON REFRESH
           sessionStorage.setItem('loggedInAddress', address);
         },
-        err => console.log(err)
+        err => {
+          console.log(err);
+          setErrorMessage(
+            'Failed to fetch data. Gemini API may currently be unavailable. Maintainer is aware of the issue.'
+          );
+        }
       );
   }, []);
 
@@ -106,5 +122,6 @@ export function useBitcornData() {
     runningBalance,
     getData,
     handleLogout,
+    errorMessage,
   };
 }

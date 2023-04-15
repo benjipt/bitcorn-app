@@ -1,13 +1,18 @@
 import React, { ChangeEvent, SyntheticEvent, useState } from 'react';
+import { ErrorMessageState } from '../types';
 
 interface SignInPageProps {
   getData: (address: string) => void;
+  errorMessage: ErrorMessageState;
 }
 
-const SignInPage = ({ getData }: SignInPageProps) => {
+const SignInPage = ({
+  getData,
+  errorMessage: fetchErrorMessage,
+}: SignInPageProps) => {
   // STATE HOOKS
   const [addressInput, setAddressInput] = useState('');
-  const [submitError, setSubmitError] = useState(false);
+  const [blankInputError, setBlankInputError] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
@@ -17,7 +22,7 @@ const SignInPage = ({ getData }: SignInPageProps) => {
   const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!addressInput) {
-      setSubmitError(true);
+      setBlankInputError(true);
     } else {
       getData(addressInput);
     }
@@ -51,9 +56,16 @@ const SignInPage = ({ getData }: SignInPageProps) => {
                 Sign In
               </button>
             </div>
-            {submitError && (
+            {/* When user clicks sign in on blank input */}
+            {blankInputError && (
               <div id='submitError' className='form-text pt-2'>
                 Must enter an address to sign in
+              </div>
+            )}
+            {/* When fetching data for user returns an error */}
+            {fetchErrorMessage && (
+              <div id='submitError' className='form-text pt-2'>
+                {fetchErrorMessage}
               </div>
             )}
           </div>

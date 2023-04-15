@@ -10,11 +10,14 @@ export default function App() {
     runningBalance,
     getData,
     handleLogout,
+    errorMessage,
   } = useBitcornData();
 
   return (
     <div data-testid='App-1'>
-      {!isLoggedIn && <SignInPage getData={getData} />}
+      {!isLoggedIn && (
+        <SignInPage getData={getData} errorMessage={errorMessage} />
+      )}
 
       {isLoggedIn && (
         <BitcornUI
