@@ -27,10 +27,11 @@ View [here](https://jobcoin-1c304e.netlify.app/)
 
 ## Project status
 
-Complete w/ improvement opportunities:
+TODOOS:
 
 - Investigate issue with ResizeDetector (Recharts dependency), does not always resize chart when window is resized by user.
-- Refactor getData function in App component so that transactions state is removed from App (redundant data).
+- IF Δ of earliest and latest transaction is less than 1 day THEN x interval on chart should be hours.
+- IF Δ of earliest and latest transaction is less than 1 hour THEN x interval on chart should be minutes.
 
 ## Changelog
 
