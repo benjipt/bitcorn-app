@@ -12,7 +12,7 @@ export const postTransaction: PostTransactionType = (
 ) => {
   return fetch(BASE_URL + 'transactions', {
     method: 'POST',
-    body: JSON.stringify({ fromAddress, toAddress, amount }),
+    body: JSON.stringify({ transaction: { fromAddress, toAddress, amount } }),
     headers: {
       'Content-Type': 'application/json',
     },

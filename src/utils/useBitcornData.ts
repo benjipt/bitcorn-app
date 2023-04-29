@@ -65,7 +65,7 @@ export function useBitcornData() {
     let currentBalance = 0;
     let balanceArr: BalancePlot[] = [];
     for (let transaction of transactions) {
-      if (transaction.toAddress === loggedInAddress) {
+      if (transaction.toAddress === loggedInAddress.toLowerCase()) {
         currentBalance += Number(transaction.amount);
       } else {
         currentBalance -= Number(transaction.amount);
