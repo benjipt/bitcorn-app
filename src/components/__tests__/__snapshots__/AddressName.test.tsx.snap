@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`AddressName matches snapshot 1`] = `
+exports[`AddressName > matches snapshot 1`] = `
 <div
   className="mt-1 ps-4"
   data-testid="AddressName-1"
