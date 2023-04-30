@@ -1,3 +1,4 @@
+import { describe, it, expect, afterEach } from 'vitest';
 import fetchMock from 'fetch-mock';
 import { postTransaction } from '../api';
 import { BASE_URL } from '../env';
@@ -7,7 +8,7 @@ describe('postTransaction', () => {
     fetchMock.restore();
   });
 
-  test('should call the API with the correct parameters and return a response', async () => {
+  it('should call the API with the correct parameters and return a response', async () => {
     // Mock the fetch function with fetchMock
     fetchMock.post(
       `${BASE_URL}transactions`,
@@ -16,9 +17,11 @@ describe('postTransaction', () => {
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
         body: {
-          fromAddress: 'testFrom',
-          toAddress: 'testTo',
-          amount: '10',
+          transaction: {
+            fromAddress: 'testFrom',
+            toAddress: 'testTo',
+            amount: '10',
+          },
         },
       }
     );
@@ -30,9 +33,11 @@ describe('postTransaction', () => {
     expect(fetchMock.lastOptions()).toEqual({
       method: 'POST',
       body: JSON.stringify({
-        fromAddress: 'testFrom',
-        toAddress: 'testTo',
-        amount: '10',
+        transaction: {
+          fromAddress: 'testFrom',
+          toAddress: 'testTo',
+          amount: '10',
+        },
       }),
       headers: {
         'Content-Type': 'application/json',

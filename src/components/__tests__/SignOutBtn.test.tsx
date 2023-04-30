@@ -1,11 +1,10 @@
-import { render, screen, cleanup, fireEvent } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 import SignOutBtn from '../SignOutBtn';
 
 describe('SignOutBtn', () => {
-  afterEach(cleanup);
-
-  test('should render SignOutButton component', () => {
+  it('should render SignOutButton component', () => {
     // Renders SignOutBtn Component
     render(<SignOutBtn handleLogout={() => {}} />);
     // Grabs component from render
@@ -14,9 +13,9 @@ describe('SignOutBtn', () => {
     expect(SignOutBtnComponent).toBeInTheDocument();
   });
 
-  test('calls handleLogout prop when called', () => {
+  it('calls handleLogout prop when called', () => {
     // Mocks function passed as prop
-    const handleLogout = jest.fn();
+    const handleLogout = vi.fn();
     // Renders component with handleLogout prop
     render(<SignOutBtn handleLogout={handleLogout} />);
     // Grabs component from render
@@ -27,7 +26,7 @@ describe('SignOutBtn', () => {
     expect(handleLogout).toHaveBeenCalledTimes(1);
   });
 
-  test('matches snapshot', () => {
+  it('matches snapshot', () => {
     // Render component tree
     const tree = renderer
       .create(<SignOutBtn handleLogout={() => {}} />)

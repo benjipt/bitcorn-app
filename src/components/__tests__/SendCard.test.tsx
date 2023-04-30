@@ -1,12 +1,11 @@
-import { render, cleanup, screen, fireEvent } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
 import SendCard from '../SendCard';
 
-const mockPostTransaction = jest.fn().mockResolvedValue({ status: 200 });
+const mockPostTransaction = vi.fn().mockResolvedValue({ status: 200 });
 
 describe('SendCard', () => {
-  afterEach(cleanup);
-
-  test('should render SendCard component', () => {
+  it('should render SendCard component', () => {
     render(
       <SendCard
         address=''
@@ -18,7 +17,7 @@ describe('SendCard', () => {
     expect(SendCardComponent).toBeInTheDocument();
   });
 
-  test('should update input fields when typing', () => {
+  it('should update input fields when typing', () => {
     render(
       <SendCard
         address=''
@@ -36,11 +35,9 @@ describe('SendCard', () => {
     expect(amountInput).toHaveValue('10');
   });
 
-  test('should display error message when not enough funds', async () => {
-    const mockGetData = jest.fn();
-    const mockPostTransactionError = jest
-      .fn()
-      .mockResolvedValue({ status: 422 });
+  it('should display error message when not enough funds', async () => {
+    const mockGetData = vi.fn();
+    const mockPostTransactionError = vi.fn().mockResolvedValue({ status: 422 });
 
     render(
       <SendCard

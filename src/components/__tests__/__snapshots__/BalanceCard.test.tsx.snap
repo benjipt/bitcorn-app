@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`BalanceCard matches snapshot 1`] = `
+exports[`BalanceCard > matches snapshot 1`] = `
 <div
   className="container text-center mt-5 p-4 border-black rounded card-custom"
   data-testid="BalanceCard-1"

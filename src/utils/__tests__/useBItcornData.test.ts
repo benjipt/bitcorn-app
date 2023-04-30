@@ -1,19 +1,20 @@
+import { beforeAll, afterEach, describe, it, expect } from 'vitest';
 import { renderHook } from '@testing-library/react-hooks';
 import { useBitcornData } from '../useBitcornData';
-import fetchMock from 'jest-fetch-mock';
+import fetchMock from 'fetch-mock';
 
 // Set up the fetch mock
 beforeAll(() => {
-  fetchMock.enableMocks();
+  fetchMock.config.overwriteRoutes = true;
 });
 
 // Reset the fetch mock after each test
 afterEach(() => {
-  fetchMock.resetMocks();
+  fetchMock.reset();
 });
 
 describe('useBitcornData', () => {
-  test('should load persisted logged in address on mount', async () => {
+  it('should load persisted logged in address on mount', async () => {
     // Arrange
     sessionStorage.setItem('loggedInAddress', 'test-address');
     const mockResponse = {
@@ -26,7 +27,11 @@ describe('useBitcornData', () => {
         },
       ],
     };
-    fetchMock.mockResponseOnce(JSON.stringify(mockResponse));
+    fetchMock.mock('*', {
+      status: 200,
+      body: JSON.stringify(mockResponse),
+      headers: { 'Content-Type': 'application/json' },
+    });
 
     // Act
     const { result, waitForNextUpdate } = renderHook(() => useBitcornData());

@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 import BalanceCard from '../BalanceCard';
@@ -5,7 +6,7 @@ import BalanceCard from '../BalanceCard';
 describe('BalanceCard', () => {
   afterEach(cleanup);
 
-  test('should render BalanceCard component', () => {
+  it('should render BalanceCard component', () => {
     // Renders BalanceCard component
     render(<BalanceCard balance='' />);
     // Grabs component from render
@@ -14,7 +15,7 @@ describe('BalanceCard', () => {
     expect(BalanceCardComponent).toBeInTheDocument();
   });
 
-  test('passed props should behave as expected', () => {
+  it('passed props should behave as expected', () => {
     // Mock prop
     const balance = '150';
     // Renders BalanceCard component with prop
@@ -25,7 +26,7 @@ describe('BalanceCard', () => {
     expect(BalanceCardComponent).toHaveTextContent(balance);
   });
 
-  test('matches snapshot', () => {
+  it('matches snapshot', () => {
     // Mock prop
     const balance = '150';
     // Render component tree
