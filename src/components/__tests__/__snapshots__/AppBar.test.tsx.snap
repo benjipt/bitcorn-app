@@ -1,4 +1,29 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`AppBar > matches snapshot 1`] = `
+<div
+  className="container-fluid pt-2 pb-2 d-flex flex-row justify-content-between app-bar app-bar-border"
+  data-testid="AppBar-1"
+>
+  <div
+    className="mt-1 ps-4"
+    data-testid="AddressName-1"
+  >
+    <h4>
+      
+    </h4>
+  </div>
+  <div>
+    <button
+      className="btn btn-outline-dark"
+      data-testid="SignOutBtn-1"
+      onClick={[Function]}
+    >
+      Sign Out
+    </button>
+  </div>
+</div>
+`;
 
 exports[`AppBar matches snapshot 1`] = `
 <div

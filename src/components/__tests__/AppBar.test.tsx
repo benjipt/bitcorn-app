@@ -1,11 +1,10 @@
-import { render, screen, cleanup, fireEvent } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
 import renderer, { ReactTestRenderer, act } from 'react-test-renderer';
 import AppBar from '../AppBar';
 
 describe('AppBar', () => {
-  afterEach(cleanup);
-
-  test('should render AppBar with AddressName and SignOutBtn', () => {
+  it('should render AppBar with AddressName and SignOutBtn', () => {
     // Renders Appbar and child components
     render(<AppBar address='' handleLogout={() => {}} />);
     // Grabs components from render
@@ -18,10 +17,10 @@ describe('AppBar', () => {
     expect(SignOutBtnComponent).toBeInTheDocument();
   });
 
-  test('passed props behave as expected', () => {
+  it('passed props behave as expected', () => {
     // Mock props
     const address = 'Jilly';
-    const handleLogout = jest.fn();
+    const handleLogout = vi.fn();
     // Renders Appbar and child components
     render(<AppBar address={address} handleLogout={handleLogout} />);
     // Grabs components from render
@@ -33,7 +32,7 @@ describe('AppBar', () => {
     expect(handleLogout).toHaveBeenCalled();
   });
 
-  test('matches snapshot', () => {
+  it('matches snapshot', () => {
     let tree: ReactTestRenderer | undefined;
     act(() => {
       tree = renderer.create(<AppBar address='' handleLogout={() => {}} />);
