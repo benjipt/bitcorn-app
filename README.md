@@ -14,7 +14,7 @@ A simple sign-on screen and user interface for a fake cryptocurrency called Bitc
 
 ## Launch
 
-View [here](https://jobcoin-1c304e.netlify.app/)
+View [here](https://bitcorn.netlify.app/)
 
 ## Technologies
 
