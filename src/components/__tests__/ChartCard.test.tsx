@@ -1,5 +1,6 @@
+import { beforeEach, describe, it, expect, vi } from 'vitest';
 import { render, cleanup, screen } from '@testing-library/react';
-import renderer, { ReactTestRendererJSON, act } from 'react-test-renderer';
+import { act } from 'react-test-renderer';
 import ChartCard from '../ChartCard';
 
 // Workaround for ResizeObserver error described here ~~>
@@ -8,22 +9,22 @@ const { ResizeObserver } = window;
 beforeEach(() => {
   //@ts-ignore
   delete window.ResizeObserver;
-  window.ResizeObserver = jest.fn().mockImplementation(() => ({
-    observe: jest.fn(),
-    unobserve: jest.fn(),
-    disconnect: jest.fn(),
+  window.ResizeObserver = vi.fn().mockImplementation(() => ({
+    observe: vi.fn(),
+    unobserve: vi.fn(),
+    disconnect: vi.fn(),
   }));
 });
 afterEach(() => {
   window.ResizeObserver = ResizeObserver;
-  jest.restoreAllMocks();
+  vi.restoreAllMocks();
 });
 // <~~ Workaround for ResizeObserver error
 
 describe('ChartCard', () => {
   afterEach(cleanup);
 
-  test('should render ChartCard component', () => {
+  it('should render ChartCard component', () => {
     // Render ChartCard component
     render(<ChartCard data={[]} />);
     // Grabs ChartCard component from render
@@ -32,13 +33,12 @@ describe('ChartCard', () => {
     expect(chartCardComponent).toBeInTheDocument();
   });
 
-  test('matches snapshot', () => {
-    // Render component tree
-    let tree: ReactTestRendererJSON | ReactTestRendererJSON[] | null;
+  it('matches snapshot', () => {
+    let tree;
     act(() => {
-      tree = renderer.create(<ChartCard data={[]} />).toJSON();
+      const { asFragment } = render(<ChartCard data={[]} />);
+      tree = asFragment();
     });
-    // Tests for matching snapshot
-    expect(tree!).toMatchSnapshot();
+    expect(tree).toMatchSnapshot();
   });
 });
