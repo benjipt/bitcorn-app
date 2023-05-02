@@ -7,6 +7,7 @@ export type Transaction = {
 export interface Response {
   balance: string;
   transactions: Transaction[];
+  error?: string;
 }
 
 export type BalancePlot = {

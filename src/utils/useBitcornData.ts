@@ -32,14 +32,22 @@ export function useBitcornData() {
           return data.json();
         },
         err => {
-          console.log(err);
           setErrorMessage(
-            'Failed to fetch data. Gemini API may currently be unavailable. Maintainer is aware of the issue.'
+            `error: ${err.status}: ${err.statusText} - ${err.url}`
           );
         }
       )
       .then(
         (parsedData: Response) => {
+          if (!parsedData) {
+            setErrorMessage('Failed to fetch data. Invalid response received.');
+            return;
+          }
+          if (parsedData?.error) {
+            setErrorMessage(`Server error:${parsedData.error}`);
+            return;
+          }
+
           const { balance, transactions } = parsedData;
           setIsLoggedIn(true);
           setLoggedInAddress(address);
@@ -49,12 +57,14 @@ export function useBitcornData() {
           sessionStorage.setItem('loggedInAddress', address);
         },
         err => {
-          console.log(err);
           setErrorMessage(
-            'Failed to fetch data. Gemini API may currently be unavailable. Maintainer is aware of the issue.'
+            `error: ${err.status}: ${err.statusText} - ${err.url}`
           );
         }
-      );
+      )
+      .catch(err => {
+        setErrorMessage(`error: ${err.status}: ${err.statusText} - ${err.url}`);
+      });
   }, []);
 
   // Calculate running balance data for chart rendering
