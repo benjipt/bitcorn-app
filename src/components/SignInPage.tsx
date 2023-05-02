@@ -1,8 +1,15 @@
-import React, { ChangeEvent, SyntheticEvent, useState } from 'react';
+// SignInPage.tsx
+import React, {
+  ChangeEvent,
+  SyntheticEvent,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { ErrorMessageState } from '../types';
 
 interface SignInPageProps {
-  getData: (address: string) => void;
+  getData: (address: string) => Promise<void>;
   errorMessage: ErrorMessageState;
 }
 
@@ -10,21 +17,35 @@ const SignInPage = ({
   getData,
   errorMessage: fetchErrorMessage,
 }: SignInPageProps) => {
-  // STATE HOOKS
   const [addressInput, setAddressInput] = useState('');
   const [blankInputError, setBlankInputError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const isMounted = useRef(false);
+  // Prevent memory leak
+  useEffect(() => {
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     setAddressInput(value);
   };
 
-  const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!addressInput) {
       setBlankInputError(true);
     } else {
-      getData(addressInput);
+      setIsLoading(true);
+      await getData(addressInput);
+      if (isMounted.current) {
+        // Prevent memory leak
+        setIsLoading(false);
+      }
     }
   };
 
@@ -52,9 +73,26 @@ const SignInPage = ({
               />
             </div>
             <div className='col-auto'>
-              <button type='submit' className='btn btn-primary'>
-                Sign In
-              </button>
+              {!isLoading ? (
+                <button
+                  type='submit'
+                  className='btn btn-dark'
+                  data-testid='sign-in-btn'>
+                  SIGN IN
+                </button>
+              ) : (
+                <button
+                  className='btn btn-light'
+                  type='button'
+                  data-testid='waking-up-btn'
+                  disabled>
+                  <span
+                    className='spinner-grow text-warning spinner-grow-sm me-2'
+                    role='status'
+                    aria-hidden='true'></span>
+                  <b className='text-black'>Waking Up</b>
+                </button>
+              )}
             </div>
             {/* When user clicks sign in on blank input */}
             {blankInputError && (

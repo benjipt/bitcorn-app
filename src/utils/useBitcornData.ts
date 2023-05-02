@@ -24,47 +24,39 @@ export function useBitcornData() {
   }, []);
 
   // Fetch address data from API and update state
-  const getData = useCallback((address: string | null) => {
+  const getData = useCallback(async (address: string | null) => {
     if (address === null) return;
-    fetch(BASE_URL + 'addresses/' + address)
-      .then(
-        data => {
-          return data.json();
-        },
-        err => {
-          setErrorMessage(
-            `error: ${err.status}: ${err.statusText} - ${err.url}`
-          );
-        }
-      )
-      .then(
-        (parsedData: Response) => {
-          if (!parsedData) {
-            setErrorMessage('Failed to fetch data. Invalid response received.');
-            return;
-          }
-          if (parsedData?.error) {
-            setErrorMessage(`Server error:${parsedData.error}`);
-            return;
-          }
+    try {
+      const response = await fetch(BASE_URL + 'addresses/' + address);
 
-          const { balance, transactions } = parsedData;
-          setIsLoggedIn(true);
-          setLoggedInAddress(address);
-          setBalance(balance);
-          createRunningBalance(transactions, address);
-          // DUPLICATES ADDRESS TO LOCAL STORAGE FOR PERSISTENT STATE UPON REFRESH
-          sessionStorage.setItem('loggedInAddress', address);
-        },
-        err => {
-          setErrorMessage(
-            `error: ${err.status}: ${err.statusText} - ${err.url}`
-          );
-        }
-      )
-      .catch(err => {
-        setErrorMessage(`error: ${err.status}: ${err.statusText} - ${err.url}`);
-      });
+      if (!response.ok) {
+        setErrorMessage(
+          `error: ${response.status}: ${response.statusText} - ${response.url}`
+        );
+        return;
+      }
+
+      const parsedData: Response = await response.json();
+
+      if (!parsedData) {
+        setErrorMessage('Failed to fetch data. Invalid response received.');
+        return;
+      }
+
+      if (parsedData?.error) {
+        setErrorMessage(`Server error: ${parsedData.error}`);
+        return;
+      }
+
+      const { balance, transactions } = parsedData;
+      setIsLoggedIn(true);
+      setLoggedInAddress(address);
+      setBalance(balance);
+      createRunningBalance(transactions, address);
+      sessionStorage.setItem('loggedInAddress', address);
+    } catch (err: any) {
+      setErrorMessage(`error: ${err.status}: ${err.statusText} - ${err.url}`);
+    }
   }, []);
 
   // Calculate running balance data for chart rendering
