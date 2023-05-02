@@ -50,10 +50,11 @@ exports[`App > matches snapshot 1`] = `
             className="col-auto"
           >
             <button
-              className="btn btn-primary"
+              className="btn btn-dark"
+              data-testid="sign-in-btn"
               type="submit"
             >
-              Sign In
+              SIGN IN
             </button>
           </div>
         </div>
