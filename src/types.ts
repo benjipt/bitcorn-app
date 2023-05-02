@@ -7,7 +7,12 @@ export type Transaction = {
 export interface Response {
   balance: string;
   transactions: Transaction[];
-  error?: string;
+  error?: ErrorResponse;
+}
+
+export interface ErrorResponse {
+  error: string;
+  status: number;
 }
 
 export type BalancePlot = {

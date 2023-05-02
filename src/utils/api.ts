@@ -16,5 +16,8 @@ export const postTransaction: PostTransactionType = (
     headers: {
       'Content-Type': 'application/json',
     },
+  }).catch(err => {
+    console.error('Error submitting transaction:', err);
+    throw new Error('Failed to submit transaction. Please try again later.');
   });
 };
