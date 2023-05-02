@@ -2,6 +2,7 @@ import { beforeAll, afterEach, describe, it, expect } from 'vitest';
 import { renderHook } from '@testing-library/react-hooks';
 import { useBitcornData } from '../useBitcornData';
 import fetchMock from 'fetch-mock';
+import { differenceInDays } from 'date-fns';
 
 // Set up the fetch mock
 beforeAll(() => {
@@ -41,5 +42,12 @@ describe('useBitcornData', () => {
     expect(result.current.isLoggedIn).toBe(true);
     expect(result.current.loggedInAddress).toBe('test-address');
     expect(result.current.balance).toBe('100');
+    expect(result.current.runningBalance[0].amount).toBe(0);
+    expect(
+      differenceInDays(
+        new Date(result.current.runningBalance[1].date),
+        new Date(result.current.runningBalance[0].date)
+      )
+    ).toBe(1);
   });
 });

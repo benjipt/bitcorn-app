@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { format } from 'date-fns';
+import { format, subDays } from 'date-fns';
 import {
   BalancePlot,
   ErrorMessageState,
@@ -63,7 +63,13 @@ export function useBitcornData() {
     loggedInAddress: string
   ) => {
     let currentBalance = 0;
-    let balanceArr: BalancePlot[] = [];
+    const balanceArr: BalancePlot[] = [];
+    const dateOfFirstTransaction = new Date(transactions[0].timestamp);
+    // Ensure starting point of 0 on chart
+    balanceArr.push({
+      amount: currentBalance,
+      date: format(subDays(dateOfFirstTransaction, 1), 'yyyy-MM-dd'),
+    });
     for (let transaction of transactions) {
       if (transaction.toAddress === loggedInAddress.toLowerCase()) {
         currentBalance += Number(transaction.amount);
