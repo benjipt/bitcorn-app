@@ -18,7 +18,7 @@ const SignInPage = ({
   errorMessage: fetchErrorMessage,
 }: SignInPageProps) => {
   const [addressInput, setAddressInput] = useState('');
-  const [blankInputError, setBlankInputError] = useState(false);
+  const [error, setError] = useState<ErrorMessageState>(fetchErrorMessage);
   const [isLoading, setIsLoading] = useState(false);
 
   const isMounted = useRef(false);
@@ -30,6 +30,13 @@ const SignInPage = ({
     };
   }, []);
 
+  // Update error state when fetchErrorMessage changes
+  useEffect(() => {
+    if (isMounted.current && fetchErrorMessage !== error) {
+      setError(fetchErrorMessage);
+    }
+  }, [fetchErrorMessage]);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     setAddressInput(value);
@@ -38,7 +45,7 @@ const SignInPage = ({
   const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!addressInput) {
-      setBlankInputError(true);
+      setError('Must enter an address to sign in');
     } else {
       setIsLoading(true);
       await getData(addressInput);
@@ -94,16 +101,9 @@ const SignInPage = ({
                 </button>
               )}
             </div>
-            {/* When user clicks sign in on blank input */}
-            {blankInputError && (
+            {error && (
               <div id='submitError' className='form-text pt-2'>
-                Must enter an address to sign in
-              </div>
-            )}
-            {/* When fetching data for user returns an error */}
-            {fetchErrorMessage && (
-              <div id='submitError' className='form-text pt-2'>
-                {fetchErrorMessage}
+                {error}
               </div>
             )}
           </div>
