@@ -29,7 +29,10 @@ export function useBitcornData() {
     try {
       const response = await fetch(BASE_URL + 'addresses/' + address);
 
-      if (!response.ok) {
+      if (response.status === 404) {
+        setErrorMessage('Address not found. Would you like to create one?');
+        return;
+      } else if (!response.ok) {
         setErrorMessage(
           `error: ${response.status}: ${response.statusText} - ${response.url}`
         );
