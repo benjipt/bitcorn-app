@@ -52,7 +52,7 @@ const SignInPage = ({
   return (
     <div className='container text-center mt-5'>
       <h1>BITCORN</h1>
-      <div className='mt-5 p-4 border-black rounded sign-in'>
+      <div className='mt-5 p-4 border-black rounded sign-in container-sm'>
         <p>Welcome! Please sign in with your Bitcorn address</p>
         <hr></hr>
         <form onSubmit={handleSubmit} className='mt-4'>
