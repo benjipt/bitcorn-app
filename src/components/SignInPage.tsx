@@ -7,11 +7,14 @@ import React, {
   useState,
 } from 'react';
 import { ErrorMessageState } from '../types';
+import AccessPrompt from './AccessPrompt';
 
 interface SignInPageProps {
   getData: (address: string) => Promise<void>;
   errorMessage: ErrorMessageState;
 }
+
+type Access = 'sign-in' | 'sign-up';
 
 const SignInPage = ({
   getData,
@@ -20,6 +23,7 @@ const SignInPage = ({
   const [addressInput, setAddressInput] = useState('');
   const [error, setError] = useState<ErrorMessageState>(fetchErrorMessage);
   const [isLoading, setIsLoading] = useState(false);
+  const [accessMode, setAccessMode] = useState<Access>('sign-in');
 
   const isMounted = useRef(false);
   // Prevent memory leak
@@ -36,6 +40,13 @@ const SignInPage = ({
       setError(fetchErrorMessage);
     }
   }, [fetchErrorMessage]);
+
+  const toggleAccessMode = () => {
+    accessMode === 'sign-in'
+      ? setAccessMode('sign-up')
+      : setAccessMode('sign-in');
+    setError(null);
+  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
@@ -60,7 +71,10 @@ const SignInPage = ({
     <div className='container text-center mt-5'>
       <h1>BITCORN</h1>
       <div className='mt-5 p-4 border-black rounded sign-in container-sm'>
-        <p>Welcome! Please sign in with your Bitcorn address</p>
+        <AccessPrompt
+          accessMode={accessMode}
+          toggleAccessMode={toggleAccessMode}
+        />
         <hr></hr>
         <form onSubmit={handleSubmit} className='mt-4'>
           <div className='row g-3 align-items-center justify-content-center'>
