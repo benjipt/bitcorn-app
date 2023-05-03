@@ -11,7 +11,7 @@ exports[`App > matches snapshot 1`] = `
       BITCORN
     </h1>
     <div
-      className="mt-5 p-4 border-black rounded sign-in"
+      className="mt-5 p-4 border-black rounded sign-in container-sm"
     >
       <p>
         Welcome! Please sign in with your Bitcorn address
