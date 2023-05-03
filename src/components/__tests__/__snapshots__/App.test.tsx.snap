@@ -16,6 +16,13 @@ exports[`App > matches snapshot 1`] = `
       <p>
         Welcome! Please sign in with your Bitcorn address
       </p>
+      <button
+        className="btn btn-outline-secondary btn-sm"
+        onClick={[Function]}
+        type="button"
+      >
+        Or Sign Up
+      </button>
       <hr />
       <form
         className="mt-4"
@@ -50,11 +57,11 @@ exports[`App > matches snapshot 1`] = `
             className="col-auto"
           >
             <button
-              className="btn btn-dark"
+              className="btn btn-success"
               data-testid="sign-in-btn"
               type="submit"
             >
-              SIGN IN
+              Sign In
             </button>
           </div>
         </div>
