@@ -8,6 +8,7 @@ import React, {
 } from 'react';
 import { ErrorMessageState } from '../types';
 import AccessPrompt from './AccessPrompt';
+import { postAddress } from '../utils/api';
 
 interface SignInPageProps {
   getData: (address: string) => Promise<void>;
@@ -55,14 +56,32 @@ const SignInPage = ({
 
   const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!addressInput) {
-      setError('Must enter an address to sign in');
-    } else {
-      setIsLoading(true);
-      await getData(addressInput);
-      if (isMounted.current) {
-        // Prevent memory leak
-        setIsLoading(false);
+    switch (accessMode) {
+      case 'sign-in': {
+        if (!addressInput) {
+          setError('Must enter an address to sign in');
+        } else {
+          setIsLoading(true);
+          await getData(addressInput);
+          if (isMounted.current) {
+            // Prevent memory leak
+            setIsLoading(false);
+          }
+        }
+        break;
+      }
+      case 'sign-up': {
+        if (!addressInput) {
+          setError('Must enter an address to sign up');
+        } else {
+          setIsLoading(true);
+          await postAddress(addressInput);
+          if (isMounted.current) {
+            // Prevent memory leak
+            setIsLoading(false);
+          }
+        }
+        break;
       }
     }
   };
@@ -97,9 +116,9 @@ const SignInPage = ({
               {!isLoading ? (
                 <button
                   type='submit'
-                  className='btn btn-dark'
+                  className='btn btn-success'
                   data-testid='sign-in-btn'>
-                  SIGN IN
+                  {accessMode === 'sign-in' ? 'Sign In' : 'Sign Up'}
                 </button>
               ) : (
                 <button
