@@ -21,3 +21,24 @@ export const postTransaction: PostTransactionType = (
     throw new Error('Failed to submit transaction. Please try again later.');
   });
 };
+
+export const postAddress = async (address: string): Promise<Response> => {
+  const response = await fetch(BASE_URL + 'addresses', {
+    method: 'POST',
+    body: JSON.stringify({ address }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).catch(err => {
+    console.error('Error creating new address:', err);
+    throw new Error('Failed to create new address. Please try again later.');
+  });
+  if (response.ok) {
+    // set global isLoggedIn state to true
+  } else if (response.status === 409) {
+    throw new Error('Address already exists.');
+  } else {
+    throw new Error('Failed to create new address. Please try again later.');
+  }
+  return response.json();
+};
