@@ -1,16 +1,16 @@
-// SignInPage.test.tsx
+// AccessPage.test.tsx
 import { vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import SignInPage from '../SignInPage';
+import AccessPage from '../AccessPage';
 
-describe('SignInPage', () => {
+describe('AccessPage', () => {
   const mockGetData = vi.fn(async (_address: string): Promise<void> => {
     // Simulate a delay to test the loading state
     return new Promise<void>(resolve => setTimeout(resolve, 1000));
   });
 
   beforeEach(() => {
-    render(<SignInPage getData={mockGetData} errorMessage={null} />);
+    render(<AccessPage getData={mockGetData} errorMessage={null} />);
   });
 
   it('renders the Sign In button', () => {
