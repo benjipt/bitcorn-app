@@ -1,4 +1,4 @@
-import SignInPage from './components/SignInPage';
+import AccessPage from './components/AccessPage';
 import BitcornUI from './components/BitcornUI';
 import { useBitcornData } from './utils/useBitcornData';
 
@@ -16,7 +16,7 @@ export default function App() {
   return (
     <div data-testid='App-1'>
       {!isLoggedIn && (
-        <SignInPage getData={getData} errorMessage={errorMessage} />
+        <AccessPage getData={getData} errorMessage={errorMessage} />
       )}
 
       {isLoggedIn && (

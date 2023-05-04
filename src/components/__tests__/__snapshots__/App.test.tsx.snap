@@ -61,7 +61,7 @@ exports[`App > matches snapshot 1`] = `
               data-testid="sign-in-btn"
               type="submit"
             >
-              Sign In
+              Login
             </button>
           </div>
         </div>

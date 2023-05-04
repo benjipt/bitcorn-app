@@ -1,4 +1,4 @@
-// SignInPage.tsx
+// AccessPage.tsx
 import React, {
   ChangeEvent,
   SyntheticEvent,
@@ -15,16 +15,16 @@ interface SignInPageProps {
   errorMessage: ErrorMessageState;
 }
 
-type Access = 'sign-in' | 'sign-up';
+type Access = 'login' | 'sign-up';
 
-const SignInPage = ({
+const AccessPage = ({
   getData,
   errorMessage: fetchErrorMessage,
 }: SignInPageProps) => {
   const [addressInput, setAddressInput] = useState('');
   const [error, setError] = useState<ErrorMessageState>(fetchErrorMessage);
   const [isLoading, setIsLoading] = useState(false);
-  const [accessMode, setAccessMode] = useState<Access>('sign-in');
+  const [accessMode, setAccessMode] = useState<Access>('login');
 
   const isMounted = useRef(false);
   // Prevent memory leak
@@ -43,9 +43,7 @@ const SignInPage = ({
   }, [fetchErrorMessage]);
 
   const toggleAccessMode = () => {
-    accessMode === 'sign-in'
-      ? setAccessMode('sign-up')
-      : setAccessMode('sign-in');
+    accessMode === 'login' ? setAccessMode('sign-up') : setAccessMode('login');
     setError(null);
   };
 
@@ -57,7 +55,7 @@ const SignInPage = ({
   const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     switch (accessMode) {
-      case 'sign-in': {
+      case 'login': {
         if (!addressInput) {
           setError('Must enter an address to sign in');
         } else {
@@ -118,7 +116,7 @@ const SignInPage = ({
                   type='submit'
                   className='btn btn-success'
                   data-testid='sign-in-btn'>
-                  {accessMode === 'sign-in' ? 'Sign In' : 'Sign Up'}
+                  {accessMode === 'login' ? 'Login' : 'Sign Up'}
                 </button>
               ) : (
                 <button
@@ -146,4 +144,4 @@ const SignInPage = ({
   );
 };
 
-export default React.memo(SignInPage);
+export default React.memo(AccessPage);
