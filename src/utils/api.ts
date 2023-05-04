@@ -1,3 +1,5 @@
+import { setLoggedIn } from '../store/slices/userSlice';
+import { useAppDispatch } from '../store/store';
 import { BASE_URL } from './env';
 export type PostTransactionType = (
   fromAddress: string,
@@ -23,6 +25,7 @@ export const postTransaction: PostTransactionType = (
 };
 
 export const postAddress = async (address: string): Promise<Response> => {
+  const dispatch = useAppDispatch();
   const response = await fetch(BASE_URL + 'addresses', {
     method: 'POST',
     body: JSON.stringify({ address }),
@@ -34,7 +37,7 @@ export const postAddress = async (address: string): Promise<Response> => {
     throw new Error('Failed to create new address. Please try again later.');
   });
   if (response.ok) {
-    // set global isLoggedIn state to true
+    dispatch(setLoggedIn(true));
   } else if (response.status === 409) {
     throw new Error('Address already exists.');
   } else {

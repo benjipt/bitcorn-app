@@ -1,10 +1,10 @@
 import AccessPage from './components/AccessPage';
 import BitcornUI from './components/BitcornUI';
+import { useAppSelector } from './store/store';
 import { useBitcornData } from './utils/useBitcornData';
 
 export default function App() {
   const {
-    isLoggedIn,
     loggedInAddress,
     balance,
     runningBalance,
@@ -12,6 +12,7 @@ export default function App() {
     handleLogout,
     errorMessage,
   } = useBitcornData();
+  const isLoggedIn = useAppSelector(state => state.user.isLoggedIn);
 
   return (
     <div data-testid='App-1'>
