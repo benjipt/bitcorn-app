@@ -9,18 +9,14 @@ import { useAppSelector } from '../store/store';
 
 interface BitcornUIProps {
   handleLogout: () => void;
-  balance: string;
   getData: (address: string) => void;
   data: BalancePlot[];
 }
 
-const BitcornUI = ({
-  handleLogout,
-  balance,
-  getData,
-  data,
-}: BitcornUIProps) => {
+const BitcornUI = ({ handleLogout, getData, data }: BitcornUIProps) => {
   const address = useAppSelector(state => state.user.address);
+  const balance = useAppSelector(state => state.user.balance);
+
   return (
     <div>
       <AppBar address={address} handleLogout={handleLogout} />
