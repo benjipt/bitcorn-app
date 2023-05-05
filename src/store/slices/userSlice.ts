@@ -4,11 +4,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface UserState {
   isLoggedIn: boolean;
   address: string;
+  balance: string;
 }
 
 const initialState: UserState = {
   isLoggedIn: false,
   address: '',
+  balance: '',
 };
 
 const userSlice = createSlice({
@@ -21,9 +23,12 @@ const userSlice = createSlice({
     setAddress: (state, action: PayloadAction<string>) => {
       state.address = action.payload;
     },
+    setBalance: (state, action: PayloadAction<string>) => {
+      state.balance = action.payload;
+    },
   },
 });
 
-export const { setLoggedIn, setAddress } = userSlice.actions;
+export const { setLoggedIn, setAddress, setBalance } = userSlice.actions;
 
 export default userSlice.reducer;
