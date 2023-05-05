@@ -3,19 +3,18 @@ import AppBar from './AppBar';
 import BalanceCard from './BalanceCard';
 import SendCard from './SendCard';
 import ChartCard from './ChartCard';
-import { BalancePlot } from '../types';
 import { postTransaction } from '../utils/api';
 import { useAppSelector } from '../store/store';
 
 interface BitcornUIProps {
   handleLogout: () => void;
   getData: (address: string) => void;
-  data: BalancePlot[];
 }
 
-const BitcornUI = ({ handleLogout, getData, data }: BitcornUIProps) => {
+const BitcornUI = ({ handleLogout, getData }: BitcornUIProps) => {
   const address = useAppSelector(state => state.user.address);
   const balance = useAppSelector(state => state.user.balance);
+  const data = useAppSelector(state => state.user.balanceHistory);
 
   return (
     <div>
