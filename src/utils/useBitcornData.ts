@@ -8,11 +8,15 @@ import {
 } from '../types';
 import { BASE_URL } from './env';
 import { useAppDispatch } from '../store/store';
-import { setLoggedIn, setAddress, setBalance } from '../store/slices/userSlice';
+import {
+  setLoggedIn,
+  setAddress,
+  setBalance,
+  setBalanceHistory,
+} from '../store/slices/userSlice';
 
 export function useBitcornData() {
   const dispatch = useAppDispatch();
-  const [runningBalance, setRunningBalance] = useState<BalancePlot[]>([]);
   const [errorMessage, setErrorMessage] = useState<ErrorMessageState>(null);
 
   // Load persisted logged in address on component mount (if available)
@@ -55,7 +59,7 @@ export function useBitcornData() {
       dispatch(setLoggedIn(true));
       dispatch(setAddress(address));
       dispatch(setBalance(balance));
-      createRunningBalance(transactions, address);
+      createBalanceHistory(transactions, address);
       sessionStorage.setItem('loggedInAddress', address);
     } catch (err: any) {
       setErrorMessage(`error: ${err.status}: ${err.statusText} - ${err.url}`);
@@ -63,7 +67,7 @@ export function useBitcornData() {
   }, []);
 
   // Calculate running balance data for chart rendering
-  const createRunningBalance = (
+  const createBalanceHistory = (
     transactions: Transaction[],
     loggedInAddress: string
   ) => {
@@ -84,7 +88,7 @@ export function useBitcornData() {
       const plot = generatePlot(transaction, currentBalance);
       updateBalanceArr(plot, balanceArr);
     }
-    setRunningBalance(balanceArr);
+    dispatch(setBalanceHistory(balanceArr));
   };
 
   // Formats dates for chart rendering
@@ -121,13 +125,12 @@ export function useBitcornData() {
     dispatch(setLoggedIn(false));
     dispatch(setAddress(''));
     dispatch(setBalance(''));
-    setRunningBalance([]);
+    dispatch(setBalanceHistory([]));
     sessionStorage.clear();
   }, []);
 
   // Return necessary data and functions for the App component to use
   return {
-    runningBalance,
     getData,
     handleLogout,
     errorMessage,
