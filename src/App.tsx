@@ -4,14 +4,8 @@ import { useAppSelector } from './store/store';
 import { useBitcornData } from './utils/useBitcornData';
 
 export default function App() {
-  const {
-    loggedInAddress,
-    balance,
-    runningBalance,
-    getData,
-    handleLogout,
-    errorMessage,
-  } = useBitcornData();
+  const { balance, runningBalance, getData, handleLogout, errorMessage } =
+    useBitcornData();
   const isLoggedIn = useAppSelector(state => state.user.isLoggedIn);
 
   return (
@@ -23,7 +17,6 @@ export default function App() {
       {isLoggedIn && (
         <BitcornUI
           handleLogout={handleLogout}
-          address={loggedInAddress}
           balance={balance}
           getData={getData}
           data={runningBalance}
