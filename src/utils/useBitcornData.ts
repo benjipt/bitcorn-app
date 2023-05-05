@@ -8,11 +8,10 @@ import {
 } from '../types';
 import { BASE_URL } from './env';
 import { useAppDispatch } from '../store/store';
-import { setLoggedIn } from '../store/slices/userSlice';
+import { setLoggedIn, setAddress } from '../store/slices/userSlice';
 
 export function useBitcornData() {
   const dispatch = useAppDispatch();
-  const [loggedInAddress, setLoggedInAddress] = useState('');
   const [balance, setBalance] = useState('');
   const [runningBalance, setRunningBalance] = useState<BalancePlot[]>([]);
   const [errorMessage, setErrorMessage] = useState<ErrorMessageState>(null);
@@ -55,7 +54,7 @@ export function useBitcornData() {
 
       const { balance, transactions } = parsedData;
       dispatch(setLoggedIn(true));
-      setLoggedInAddress(address);
+      dispatch(setAddress(address));
       setBalance(balance);
       createRunningBalance(transactions, address);
       sessionStorage.setItem('loggedInAddress', address);
@@ -121,7 +120,7 @@ export function useBitcornData() {
   // Handle logout functionality
   const handleLogout = useCallback(() => {
     dispatch(setLoggedIn(false));
-    setLoggedInAddress('');
+    dispatch(setAddress(''));
     setBalance('');
     setRunningBalance([]);
     sessionStorage.clear();
@@ -129,7 +128,6 @@ export function useBitcornData() {
 
   // Return necessary data and functions for the App component to use
   return {
-    loggedInAddress,
     balance,
     runningBalance,
     getData,

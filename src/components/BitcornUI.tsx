@@ -5,9 +5,9 @@ import SendCard from './SendCard';
 import ChartCard from './ChartCard';
 import { BalancePlot } from '../types';
 import { postTransaction } from '../utils/api';
+import { useAppSelector } from '../store/store';
 
 interface BitcornUIProps {
-  address: string;
   handleLogout: () => void;
   balance: string;
   getData: (address: string) => void;
@@ -15,12 +15,12 @@ interface BitcornUIProps {
 }
 
 const BitcornUI = ({
-  address,
   handleLogout,
   balance,
   getData,
   data,
 }: BitcornUIProps) => {
+  const address = useAppSelector(state => state.user.address);
   return (
     <div>
       <AppBar address={address} handleLogout={handleLogout} />
