@@ -1,4 +1,4 @@
-# BITCORN
+# BITCORN APP
 
 ## Table of contents
 
@@ -10,7 +10,7 @@
 
 ## General info
 
-A simple sign-on screen and wallet UI for a fake cryptocurrency called Bitcorn. Built with React, Typescript, Bootstrap, and D3 (Recharts), w/ Vite, Vitest, and RTL. Read about the backend service: [bitcorn-chain](https://github.com/benjipt/bitcorn-chain).
+A wallet client for a fictional cryptocurrency called Bitcorn. Built with React, Redux, Typescript, Bootstrap, D3 (Recharts), & Vite. Read about the backend service: [bitcorn-chain](https://github.com/benjipt/bitcorn-chain).
 
 ## Launch
 
@@ -19,12 +19,13 @@ View [here](https://bitcorn.netlify.app/)
 ## Technologies
 
 - React
+- Redux / Redux-Toolkit
 - Typescript
 - Vite
 - Bootstrap
 - D3 (Recharts)
 - date-fns
-- Vitest / RTL
+- Vitest / React Testing Library
 
 ## Project status
 
@@ -36,6 +37,8 @@ TODOOS:
 
 ## Changelog
 
+- Added Signup flow for new users (May 13, 2023)
+- Migrated shared component state to Redux / Redux-Toolkit (May 13, 2023)
 - Chart Improvements: First plot starts at zero (May 2, 2023)
 - Migrated from Jest to Vitest (May 1, 2023)
 - Migrated from Gemini API to new backend service: [bitcorn-chain](https://github.com/benjipt/bitcorn-chain) (Apr 30, 2023)
