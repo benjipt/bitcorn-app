@@ -120,18 +120,6 @@ export function useBitcornData() {
     []
   );
 
-  // Handle logout functionality
-  const handleLogout = useCallback(() => {
-    dispatch(setLoggedIn(false));
-    dispatch(setAddress(''));
-    dispatch(setBalance(''));
-    dispatch(setBalanceHistory([]));
-    sessionStorage.clear();
-  }, []);
-
   // Return necessary data and functions for the App component to use
-  return {
-    getData,
-    handleLogout,
-  };
+  return getData;
 }
