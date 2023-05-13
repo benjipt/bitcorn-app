@@ -6,25 +6,23 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { ErrorMessageState } from '../types';
 import AccessPrompt from './AccessPrompt';
 import { postAddress } from '../utils/api';
+import { useAppDispatch, useAppSelector } from '../store/store';
+import { setError } from '../store/slices/userSlice';
 
 interface SignInPageProps {
   getData: (address: string) => Promise<void>;
-  errorMessage: ErrorMessageState;
 }
 
 type Access = 'login' | 'sign-up';
 
-const AccessPage = ({
-  getData,
-  errorMessage: fetchErrorMessage,
-}: SignInPageProps) => {
+const AccessPage = ({ getData }: SignInPageProps) => {
   const [addressInput, setAddressInput] = useState('');
-  const [error, setError] = useState<ErrorMessageState>(fetchErrorMessage);
   const [isLoading, setIsLoading] = useState(false);
   const [accessMode, setAccessMode] = useState<Access>('login');
+  const error = useAppSelector(state => state.user.error);
+  const dispatch = useAppDispatch();
 
   const isMounted = useRef(false);
   // Prevent memory leak
@@ -35,16 +33,9 @@ const AccessPage = ({
     };
   }, []);
 
-  // Update error state when fetchErrorMessage changes
-  useEffect(() => {
-    if (isMounted.current && fetchErrorMessage !== error) {
-      setError(fetchErrorMessage);
-    }
-  }, [fetchErrorMessage]);
-
   const toggleAccessMode = () => {
     accessMode === 'login' ? setAccessMode('sign-up') : setAccessMode('login');
-    setError(null);
+    dispatch(setError(null));
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +48,7 @@ const AccessPage = ({
     switch (accessMode) {
       case 'login': {
         if (!addressInput) {
-          setError('Must enter an address to sign in');
+          dispatch(setError('Must enter an address to sign in'));
         } else {
           setIsLoading(true);
           await getData(addressInput);
@@ -70,7 +61,7 @@ const AccessPage = ({
       }
       case 'sign-up': {
         if (!addressInput) {
-          setError('Must enter an address to sign up');
+          dispatch(setError('Must enter an address to sign up'));
         } else {
           setIsLoading(true);
           await postAddress(addressInput);

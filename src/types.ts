@@ -19,5 +19,3 @@ export type BalancePlot = {
   amount: number;
   date: string;
 };
-
-export type ErrorMessageState = null | string;
