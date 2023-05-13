@@ -79,6 +79,7 @@ const AccessPage = ({ getData }: SignInPageProps) => {
           dispatch(setBalance(balance));
           createBalanceHistory(transactions, addressInput);
           dispatch(setLoggedIn(true));
+          dispatch(setError(null));
           dispatch(setAddress(addressInput));
           sessionStorage.setItem('loggedInAddress', addressInput);
           // Prevent memory leak
