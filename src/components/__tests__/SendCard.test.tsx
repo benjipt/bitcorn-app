@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import SendCard from '../SendCard';
+import SendCard from '@/components/SendCard';
 
 const mockPostTransaction = vi.fn().mockResolvedValue({ status: 200 });
 

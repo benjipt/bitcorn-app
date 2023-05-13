@@ -2,8 +2,8 @@
 import { vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import store from '../../store/store';
-import AccessPage from '../AccessPage';
+import store from '@/store/store';
+import AccessPage from '@/components/AccessPage';
 
 describe('AccessPage', () => {
   const mockGetData = vi.fn(async (_address: string): Promise<string> => {

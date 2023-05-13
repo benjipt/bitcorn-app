@@ -1,14 +1,14 @@
 // AppBar.tsx
 import { useCallback } from 'react';
-import { useAppDispatch } from '../store/store';
-import AddressName from './AddressName';
-import SignOutBtn from './SignOutBtn';
+import { useAppDispatch } from '@/store/store';
+import AddressName from '@/components/AddressName';
+import SignOutBtn from '@/components/SignOutBtn';
 import {
   setAddress,
   setBalance,
   setBalanceHistory,
   setLoggedIn,
-} from '../store/slices/userSlice';
+} from '@/store/slices/userSlice';
 
 interface AppBarProps {
   address: string;

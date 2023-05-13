@@ -1,16 +1,16 @@
 // src/utils/useBitcornData.ts
 import { useEffect, useCallback } from 'react';
 import { format, subDays } from 'date-fns';
-import { BalancePlot, AddressData, Transaction } from '../types';
-import { BASE_URL } from './env';
-import { useAppDispatch } from '../store/store';
+import { BalancePlot, AddressData, Transaction } from '@/types';
+import { BASE_URL } from '@/utils/env';
+import { useAppDispatch } from '@/store/store';
 import {
   setLoggedIn,
   setAddress,
   setBalance,
   setBalanceHistory,
   setError,
-} from '../store/slices/userSlice';
+} from '@/store/slices/userSlice';
 
 export function useBitcornData() {
   const dispatch = useAppDispatch();

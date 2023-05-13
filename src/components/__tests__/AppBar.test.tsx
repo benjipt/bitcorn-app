@@ -1,10 +1,10 @@
 // AppBar.test.tsx
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import store from '../../store/store';
 import renderer, { ReactTestRenderer, act } from 'react-test-renderer';
-import AppBar from '../AppBar';
+import { Provider } from 'react-redux';
+import store from '@/store/store';
+import AppBar from '@/components/AppBar';
 
 describe('AppBar', () => {
   it('should render AppBar with AddressName and SignOutBtn', () => {

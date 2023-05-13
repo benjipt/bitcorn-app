@@ -1,7 +1,7 @@
 import { beforeEach, describe, it, expect, vi } from 'vitest';
 import { render, cleanup, screen } from '@testing-library/react';
 import { act } from 'react-test-renderer';
-import ChartCard from '../ChartCard';
+import ChartCard from '@/components/ChartCard';
 
 // Workaround for ResizeObserver error described here ~~>
 // https://github.com/maslianok/react-resize-detector/issues/145

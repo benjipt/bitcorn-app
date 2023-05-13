@@ -1,7 +1,7 @@
-import AccessPage from './components/AccessPage';
-import BitcornUI from './components/BitcornUI';
-import { useAppSelector } from './store/store';
-import { useBitcornData } from './utils/useBitcornData';
+import AccessPage from '@/components/AccessPage';
+import BitcornUI from '@/components/BitcornUI';
+import { useAppSelector } from '@/store/store';
+import { useBitcornData } from '@/utils/useBitcornData';
 
 export default function App() {
   const { getData } = useBitcornData();
