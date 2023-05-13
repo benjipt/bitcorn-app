@@ -24,47 +24,56 @@ export function useBitcornData() {
   }, []);
 
   // Fetch address data from API and update state
-  const getData = useCallback(async (address: string | null) => {
-    if (address === null) return;
-    try {
-      const response = await fetch(BASE_URL + 'addresses/' + address);
+  const getData = useCallback(
+    async (address: string | null): Promise<string> => {
+      if (address === null) return 'No address provided';
+      try {
+        const response = await fetch(BASE_URL + 'addresses/' + address);
 
-      if (response.status === 404) {
-        dispatch(setError('Address not found. Would you like to create one?'));
-        return;
-      } else if (!response.ok) {
+        if (response.status === 404) {
+          dispatch(
+            setError('Address not found. Would you like to create one?')
+          );
+          return 'Address not found';
+        } else if (!response.ok) {
+          dispatch(
+            setError(
+              `error: ${response.status}: ${response.statusText} - ${response.url}`
+            )
+          );
+          return 'Response not OK';
+        }
+
+        const parsedData: Response = await response.json();
+
+        if (!parsedData) {
+          dispatch(
+            setError('Failed to fetch data. Invalid response received.')
+          );
+          return 'Invalid response data';
+        }
+
+        if (parsedData?.error) {
+          dispatch(setError(`Server error: ${parsedData.error}`));
+          return `Server error: ${parsedData.error}`;
+        }
+
+        const { balance, transactions } = parsedData;
+        dispatch(setLoggedIn(true));
+        dispatch(setAddress(address));
+        dispatch(setBalance(balance));
+        createBalanceHistory(transactions, address);
+        sessionStorage.setItem('loggedInAddress', address);
+        return 'Data fetch successful';
+      } catch (err: any) {
         dispatch(
-          setError(
-            `error: ${response.status}: ${response.statusText} - ${response.url}`
-          )
+          setError(`error: ${err.status}: ${err.statusText} - ${err.url}`)
         );
-        return;
+        return `Error: ${err.toString()}`;
       }
-
-      const parsedData: Response = await response.json();
-
-      if (!parsedData) {
-        dispatch(setError('Failed to fetch data. Invalid response received.'));
-        return;
-      }
-
-      if (parsedData?.error) {
-        dispatch(setError(`Server error: ${parsedData.error}`));
-        return;
-      }
-
-      const { balance, transactions } = parsedData;
-      dispatch(setLoggedIn(true));
-      dispatch(setAddress(address));
-      dispatch(setBalance(balance));
-      createBalanceHistory(transactions, address);
-      sessionStorage.setItem('loggedInAddress', address);
-    } catch (err: any) {
-      dispatch(
-        setError(`error: ${err.status}: ${err.statusText} - ${err.url}`)
-      );
-    }
-  }, []);
+    },
+    []
+  );
 
   // Calculate running balance data for chart rendering
   const createBalanceHistory = (
