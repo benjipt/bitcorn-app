@@ -1,16 +1,25 @@
-# BITCORN
+<div align="center">
+  <img src="public/bitcorn-app-logo.png" alt="Bitcorn Logo">  
+  <p>&nbsp;</p>
+
+# BITCORN APP
+
+![Netlify](https://img.shields.io/netlify/76226d37-d764-407d-8f28-7ad1bdc7e5ec)
+![Last Commit](https://img.shields.io/github/last-commit/benjipt/bitcorn-app/main)
+
+  <p>&nbsp;</p>
+</div>
 
 ## Table of contents
 
 - [General info](#general-info)
 - [Launch](#launch)
 - [Technologies](#technologies)
-- [Project status](#project-status)
 - [Changelog](#changelog)
 
 ## General info
 
-A simple sign-on screen and wallet UI for a fake cryptocurrency called Bitcorn. Built with React, Typescript, Bootstrap, and D3 (Recharts), w/ Vite, Vitest, and RTL. Read about the backend service: [bitcorn-chain](https://github.com/benjipt/bitcorn-chain).
+React wallet client for a fictional cryptocurrency called Bitcorn. Built with React, Redux, Typescript, Bootstrap, D3 (Recharts), & Vite. Read about the backend service: [bitcorn-chain](https://github.com/benjipt/bitcorn-chain).
 
 ## Launch
 
@@ -19,23 +28,19 @@ View [here](https://bitcorn.netlify.app/)
 ## Technologies
 
 - React
+- Redux / Redux-Toolkit
 - Typescript
 - Vite
 - Bootstrap
 - D3 (Recharts)
 - date-fns
-- Vitest / RTL
-
-## Project status
-
-TODOOS:
-
-- Investigate issue with ResizeDetector (Recharts dependency), does not always resize chart when window is resized by user.
-- IF Δ of earliest and latest transaction is less than 1 day THEN x interval on chart should be hours.
-- IF Δ of earliest and latest transaction is less than 1 hour THEN x interval on chart should be minutes.
+- Vitest
+- React Testing Library
 
 ## Changelog
 
+- Added Signup flow for new users (May 13, 2023)
+- Migrated shared component state to Redux / Redux-Toolkit (May 13, 2023)
 - Chart Improvements: First plot starts at zero (May 2, 2023)
 - Migrated from Jest to Vitest (May 1, 2023)
 - Migrated from Gemini API to new backend service: [bitcorn-chain](https://github.com/benjipt/bitcorn-chain) (Apr 30, 2023)
