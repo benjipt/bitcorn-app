@@ -6,9 +6,9 @@ import store from '../../store/store';
 import AccessPage from '../AccessPage';
 
 describe('AccessPage', () => {
-  const mockGetData = vi.fn(async (_address: string): Promise<void> => {
+  const mockGetData = vi.fn(async (_address: string): Promise<string> => {
     // Simulate a delay to test the loading state
-    return new Promise<void>(resolve => setTimeout(resolve, 1000));
+    return new Promise<string>(resolve => setTimeout(resolve, 1000));
   });
 
   beforeEach(() => {

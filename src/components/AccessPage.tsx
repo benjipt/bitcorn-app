@@ -9,7 +9,13 @@ import React, {
 import AccessPrompt from './AccessPrompt';
 import { postAddress } from '../utils/api';
 import { useAppDispatch, useAppSelector } from '../store/store';
-import { setError } from '../store/slices/userSlice';
+import {
+  setAddress,
+  setBalance,
+  setError,
+  setLoggedIn,
+} from '../store/slices/userSlice';
+import { useBitcornData } from '../utils/useBitcornData';
 
 interface SignInPageProps {
   getData: (address: string) => Promise<string>;
@@ -21,6 +27,9 @@ const AccessPage = ({ getData }: SignInPageProps) => {
   const [addressInput, setAddressInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [accessMode, setAccessMode] = useState<Access>('login');
+
+  const { createBalanceHistory } = useBitcornData();
+
   const error = useAppSelector(state => state.user.error);
   const dispatch = useAppDispatch();
 
@@ -54,7 +63,7 @@ const AccessPage = ({ getData }: SignInPageProps) => {
           const result = await getData(addressInput);
           result === 'Address not found' ? setAccessMode('sign-up') : null;
           // Prevent memory leak
-          isMounted.current ? setIsLoading(false) : null;
+          if (isMounted.current) setIsLoading(false);
         }
         break;
       }
@@ -63,11 +72,17 @@ const AccessPage = ({ getData }: SignInPageProps) => {
           dispatch(setError('Must enter an address to sign up'));
         } else {
           setIsLoading(true);
-          await postAddress(addressInput);
-          if (isMounted.current) {
-            // Prevent memory leak
-            setIsLoading(false);
-          }
+          const { balance, transactions } = await postAddress(
+            addressInput,
+            dispatch
+          );
+          dispatch(setBalance(balance));
+          createBalanceHistory(transactions, addressInput);
+          dispatch(setLoggedIn(true));
+          dispatch(setAddress(addressInput));
+          sessionStorage.setItem('loggedInAddress', addressInput);
+          // Prevent memory leak
+          if (isMounted.current) setIsLoading(false);
         }
         break;
       }
