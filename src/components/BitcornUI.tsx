@@ -7,18 +7,17 @@ import { postTransaction } from '../utils/api';
 import { useAppSelector } from '../store/store';
 
 interface BitcornUIProps {
-  handleLogout: () => void;
   getData: (address: string) => void;
 }
 
-const BitcornUI = ({ handleLogout, getData }: BitcornUIProps) => {
+const BitcornUI = ({ getData }: BitcornUIProps) => {
   const address = useAppSelector(state => state.user.address);
   const balance = useAppSelector(state => state.user.balance);
   const data = useAppSelector(state => state.user.balanceHistory);
 
   return (
     <div>
-      <AppBar address={address} handleLogout={handleLogout} />
+      <AppBar address={address} />
       <div className='container-fluid'>
         <div className='row ps-3'>
           <div className='row col-lg-4 me-3'>
