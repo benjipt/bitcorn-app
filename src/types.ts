@@ -4,7 +4,9 @@ export type Transaction = {
   toAddress: string;
 };
 
-export interface Response {
+/* TODO: Rename this to something else or get rid of it.
+ * Conflicts with built-in Response type. */
+export interface AddressData {
   balance: string;
   transactions: Transaction[];
   error?: ErrorResponse;

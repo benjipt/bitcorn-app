@@ -1,5 +1,6 @@
-import { setLoggedIn } from '../store/slices/userSlice';
+import { setError } from '../store/slices/userSlice';
 import { useAppDispatch } from '../store/store';
+import { AddressData } from '../types';
 import { BASE_URL } from './env';
 export type PostTransactionType = (
   fromAddress: string,
@@ -24,24 +25,35 @@ export const postTransaction: PostTransactionType = (
   });
 };
 
-export const postAddress = async (address: string): Promise<Response> => {
-  const dispatch = useAppDispatch();
-  const response = await fetch(BASE_URL + 'addresses', {
-    method: 'POST',
-    body: JSON.stringify({ address }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }).catch(err => {
+export const postAddress = async (
+  address: string,
+  dispatch: ReturnType<typeof useAppDispatch>
+): Promise<AddressData> => {
+  let response: Response | undefined;
+
+  try {
+    response = await fetch(BASE_URL + 'addresses', {
+      method: 'POST',
+      body: JSON.stringify({ address }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (err) {
     console.error('Error creating new address:', err);
-    throw new Error('Failed to create new address. Please try again later.');
-  });
-  if (response.ok) {
-    dispatch(setLoggedIn(true));
-  } else if (response.status === 409) {
-    throw new Error('Address already exists.');
-  } else {
-    throw new Error('Failed to create new address. Please try again later.');
+    dispatch(setError('Failed to create new address. Please try again later.'));
   }
-  return response.json();
+
+  if (!response) {
+    dispatch(setError('No response from the server. Please try again later.'));
+  }
+
+  if (response?.status === 409) {
+    dispatch(setError('Address already exists.'));
+  } else if (!response?.ok) {
+    dispatch(setError('Failed to create new address. Please try again later.'));
+  }
+
+  console.log(response);
+  return response?.json();
 };
