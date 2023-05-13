@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from '../store/store';
 import { setError } from '../store/slices/userSlice';
 
 interface SignInPageProps {
-  getData: (address: string) => Promise<void>;
+  getData: (address: string) => Promise<string>;
 }
 
 type Access = 'login' | 'sign-up';
@@ -51,11 +51,10 @@ const AccessPage = ({ getData }: SignInPageProps) => {
           dispatch(setError('Must enter an address to sign in'));
         } else {
           setIsLoading(true);
-          await getData(addressInput);
-          if (isMounted.current) {
-            // Prevent memory leak
-            setIsLoading(false);
-          }
+          const result = await getData(addressInput);
+          result === 'Address not found' ? setAccessMode('sign-up') : null;
+          // Prevent memory leak
+          isMounted.current ? setIsLoading(false) : null;
         }
         break;
       }
