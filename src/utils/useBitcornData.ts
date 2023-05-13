@@ -1,11 +1,6 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 import { format, subDays } from 'date-fns';
-import {
-  BalancePlot,
-  ErrorMessageState,
-  Response,
-  Transaction,
-} from '../types';
+import { BalancePlot, Response, Transaction } from '../types';
 import { BASE_URL } from './env';
 import { useAppDispatch } from '../store/store';
 import {
@@ -13,11 +8,12 @@ import {
   setAddress,
   setBalance,
   setBalanceHistory,
+  setError,
 } from '../store/slices/userSlice';
 
 export function useBitcornData() {
   const dispatch = useAppDispatch();
-  const [errorMessage, setErrorMessage] = useState<ErrorMessageState>(null);
+  // const [errorMessage, setErrorMessage] = useState<ErrorMessageState>(null);
 
   // Load persisted logged in address on component mount (if available)
   useEffect(() => {
@@ -34,11 +30,13 @@ export function useBitcornData() {
       const response = await fetch(BASE_URL + 'addresses/' + address);
 
       if (response.status === 404) {
-        setErrorMessage('Address not found. Would you like to create one?');
+        dispatch(setError('Address not found. Would you like to create one?'));
         return;
       } else if (!response.ok) {
-        setErrorMessage(
-          `error: ${response.status}: ${response.statusText} - ${response.url}`
+        dispatch(
+          setError(
+            `error: ${response.status}: ${response.statusText} - ${response.url}`
+          )
         );
         return;
       }
@@ -46,12 +44,12 @@ export function useBitcornData() {
       const parsedData: Response = await response.json();
 
       if (!parsedData) {
-        setErrorMessage('Failed to fetch data. Invalid response received.');
+        dispatch(setError('Failed to fetch data. Invalid response received.'));
         return;
       }
 
       if (parsedData?.error) {
-        setErrorMessage(`Server error: ${parsedData.error}`);
+        dispatch(setError(`Server error: ${parsedData.error}`));
         return;
       }
 
@@ -62,7 +60,9 @@ export function useBitcornData() {
       createBalanceHistory(transactions, address);
       sessionStorage.setItem('loggedInAddress', address);
     } catch (err: any) {
-      setErrorMessage(`error: ${err.status}: ${err.statusText} - ${err.url}`);
+      dispatch(
+        setError(`error: ${err.status}: ${err.statusText} - ${err.url}`)
+      );
     }
   }, []);
 
@@ -133,6 +133,5 @@ export function useBitcornData() {
   return {
     getData,
     handleLogout,
-    errorMessage,
   };
 }

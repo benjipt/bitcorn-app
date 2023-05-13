@@ -7,6 +7,7 @@ interface UserState {
   address: string;
   balance: string;
   balanceHistory: BalancePlot[];
+  error: string | null;
 }
 
 const initialState: UserState = {
@@ -14,6 +15,7 @@ const initialState: UserState = {
   address: '',
   balance: '',
   balanceHistory: [],
+  error: null,
 };
 
 const userSlice = createSlice({
@@ -32,10 +34,18 @@ const userSlice = createSlice({
     setBalanceHistory: (state, action: PayloadAction<BalancePlot[]>) => {
       state.balanceHistory = action.payload;
     },
+    setError: (state, action: PayloadAction<string | null>) => {
+      state.error = action.payload;
+    },
   },
 });
 
-export const { setLoggedIn, setAddress, setBalance, setBalanceHistory } =
-  userSlice.actions;
+export const {
+  setLoggedIn,
+  setAddress,
+  setBalance,
+  setBalanceHistory,
+  setError,
+} = userSlice.actions;
 
 export default userSlice.reducer;

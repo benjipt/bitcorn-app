@@ -1,6 +1,8 @@
 // AccessPage.test.tsx
 import { vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import store from '../../store/store';
 import AccessPage from '../AccessPage';
 
 describe('AccessPage', () => {
@@ -10,7 +12,11 @@ describe('AccessPage', () => {
   });
 
   beforeEach(() => {
-    render(<AccessPage getData={mockGetData} errorMessage={null} />);
+    render(
+      <Provider store={store}>
+        <AccessPage getData={mockGetData} />
+      </Provider>
+    );
   });
 
   it('renders the Sign In button', () => {
