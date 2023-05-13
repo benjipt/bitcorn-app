@@ -1,7 +1,7 @@
-import { setError } from '../store/slices/userSlice';
-import { useAppDispatch } from '../store/store';
-import { AddressData } from '../types';
-import { BASE_URL } from './env';
+import { setError } from '@/store/slices/userSlice';
+import { useAppDispatch } from '@/store/store';
+import { AddressData } from '@/types';
+import { BASE_URL } from '@/utils/env';
 export type PostTransactionType = (
   fromAddress: string,
   toAddress: string,

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
 import renderer from 'react-test-renderer';
-import BalanceCard from '../BalanceCard';
+import BalanceCard from '@/components/BalanceCard';
 
 describe('BalanceCard', () => {
   afterEach(cleanup);

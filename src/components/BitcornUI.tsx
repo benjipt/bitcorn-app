@@ -1,10 +1,10 @@
 import React from 'react';
-import AppBar from './AppBar';
-import BalanceCard from './BalanceCard';
-import SendCard from './SendCard';
-import ChartCard from './ChartCard';
-import { postTransaction } from '../utils/api';
-import { useAppSelector } from '../store/store';
+import AppBar from '@/components/AppBar';
+import BalanceCard from '@/components/BalanceCard';
+import SendCard from '@/components/SendCard';
+import ChartCard from '@/components/ChartCard';
+import { postTransaction } from '@/utils/api';
+import { useAppSelector } from '@/store/store';
 
 interface BitcornUIProps {
   getData: (address: string) => void;

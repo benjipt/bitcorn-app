@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import renderer from 'react-test-renderer';
-import SignOutBtn from '../SignOutBtn';
+import SignOutBtn from '@/components/SignOutBtn';
 
 describe('SignOutBtn', () => {
   it('should render SignOutButton component', () => {

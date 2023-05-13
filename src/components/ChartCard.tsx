@@ -6,8 +6,8 @@ import {
   LineChart,
   Line,
 } from 'recharts';
-import { BalancePlot } from '../types';
-import ErrorBoundary from './ErrorBoundary';
+import { BalancePlot } from '@/types';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
 interface ChartCardProps {
   data: BalancePlot[];

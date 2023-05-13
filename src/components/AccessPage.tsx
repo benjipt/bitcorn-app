@@ -6,16 +6,16 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import AccessPrompt from './AccessPrompt';
-import { postAddress } from '../utils/api';
-import { useAppDispatch, useAppSelector } from '../store/store';
+import AccessPrompt from '@/components/AccessPrompt';
+import { postAddress } from '@/utils/api';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 import {
   setAddress,
   setBalance,
   setError,
   setLoggedIn,
-} from '../store/slices/userSlice';
-import { useBitcornData } from '../utils/useBitcornData';
+} from '@/store/slices/userSlice';
+import { useBitcornData } from '@/utils/useBitcornData';
 
 interface SignInPageProps {
   getData: (address: string) => Promise<string>;
