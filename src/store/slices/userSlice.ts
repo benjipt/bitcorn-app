@@ -8,6 +8,7 @@ interface UserState {
   balance: string;
   balanceHistory: BalancePlot[];
   error: string | null;
+  isNewUser: boolean;
 }
 
 const initialState: UserState = {
@@ -16,6 +17,7 @@ const initialState: UserState = {
   balance: '',
   balanceHistory: [],
   error: null,
+  isNewUser: false,
 };
 
 const userSlice = createSlice({
@@ -37,6 +39,9 @@ const userSlice = createSlice({
     setError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload;
     },
+    setIsNewUser: (state, action: PayloadAction<boolean>) => {
+      state.isNewUser = action.payload;
+    },
   },
 });
 
@@ -46,6 +51,7 @@ export const {
   setBalance,
   setBalanceHistory,
   setError,
+  setIsNewUser,
 } = userSlice.actions;
 
 export default userSlice.reducer;

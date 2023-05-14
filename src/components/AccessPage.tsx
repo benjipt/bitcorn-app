@@ -13,6 +13,7 @@ import {
   setAddress,
   setBalance,
   setError,
+  setIsNewUser,
   setLoggedIn,
 } from '@/store/slices/userSlice';
 import { useBitcornData } from '@/utils/useBitcornData';
@@ -76,11 +77,12 @@ const AccessPage = ({ getData }: SignInPageProps) => {
             addressInput,
             dispatch
           );
+          dispatch(setAddress(addressInput));
           dispatch(setBalance(balance));
           createBalanceHistory(transactions, addressInput);
           dispatch(setLoggedIn(true));
           dispatch(setError(null));
-          dispatch(setAddress(addressInput));
+          dispatch(setIsNewUser(true));
           sessionStorage.setItem('loggedInAddress', addressInput);
           // Prevent memory leak
           if (isMounted.current) setIsLoading(false);

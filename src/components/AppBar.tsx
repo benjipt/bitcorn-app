@@ -7,6 +7,8 @@ import {
   setAddress,
   setBalance,
   setBalanceHistory,
+  setError,
+  setIsNewUser,
   setLoggedIn,
 } from '@/store/slices/userSlice';
 
@@ -22,6 +24,8 @@ export default function AppBar({ address }: AppBarProps) {
     dispatch(setAddress(''));
     dispatch(setBalance(''));
     dispatch(setBalanceHistory([]));
+    dispatch(setError(null));
+    dispatch(setIsNewUser(false));
     sessionStorage.clear();
   }, []);
 
