@@ -1,4 +1,4 @@
-// AccessPage.tsx
+// AccessPage.tsx is a child component of App.tsx.
 import React, {
   ChangeEvent,
   SyntheticEvent,

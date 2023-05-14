@@ -1,3 +1,4 @@
+// BitcornUI.tsx is a child component of App.tsx. It renders the AppBar, BalanceCard, SendCard, and ChartCard components.
 import React from 'react';
 import AppBar from '@/components/AppBar';
 import BalanceCard from '@/components/BalanceCard';
@@ -11,9 +12,12 @@ interface BitcornUIProps {
 }
 
 const BitcornUI = ({ getData }: BitcornUIProps) => {
-  const address = useAppSelector(state => state.user.address);
-  const balance = useAppSelector(state => state.user.balance);
-  const data = useAppSelector(state => state.user.balanceHistory);
+  const {
+    address,
+    balance,
+    balanceHistory: data,
+    // isNewUser,
+  } = useAppSelector(state => state.user);
 
   return (
     <div>
