@@ -54,6 +54,5 @@ export const postAddress = async (
     dispatch(setError('Failed to create new address. Please try again later.'));
   }
 
-  console.log(response);
   return response?.json();
 };

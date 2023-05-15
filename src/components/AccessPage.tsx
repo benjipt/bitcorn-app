@@ -8,6 +8,7 @@ import React, {
 } from 'react';
 import AccessPrompt from '@/components/AccessPrompt';
 import { postAddress } from '@/utils/api';
+import { useBitcornData } from '@/utils/useBitcornData';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import {
   setAddress,
@@ -16,7 +17,6 @@ import {
   setIsNewUser,
   setLoggedIn,
 } from '@/store/slices/userSlice';
-import { useBitcornData } from '@/utils/useBitcornData';
 
 interface SignInPageProps {
   getData: (address: string) => Promise<string>;
