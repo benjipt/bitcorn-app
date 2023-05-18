@@ -10,7 +10,7 @@ interface UIState {
 }
 
 const initialState: UIState = {
-  showModal: ModalTypes.WELCOME,
+  showModal: null,
 };
 
 export const uiSlice = createSlice({
