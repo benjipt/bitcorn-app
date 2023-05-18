@@ -95,58 +95,64 @@ const AccessPage = ({ getData }: SignInPageProps) => {
   return (
     <div className='container text-center mt-5'>
       <h1>BITCORN</h1>
-      <div className='mt-5 p-4 border-black rounded sign-in container-sm'>
-        <AccessPrompt
-          accessMode={accessMode}
-          toggleAccessMode={toggleAccessMode}
-        />
-        <hr></hr>
-        <form onSubmit={handleSubmit} className='mt-4'>
-          <div className='row g-3 align-items-center justify-content-center'>
-            <div className='col-auto'>
-              <label htmlFor='address' className='form-label visually-hidden'>
-                Address
-              </label>
-            </div>
-            <div className='col-12 col-sm-auto'>
-              <input
-                onChange={handleChange}
-                type='text'
-                className='form-control'
-                id='address'
-                placeholder='Jilly'
-                value={addressInput}
-              />
-            </div>
-            <div className='col-12 col-sm-auto'>
-              {!isLoading ? (
-                <button
-                  type='submit'
-                  className='btn btn-success w-100'
-                  data-testid='sign-in-btn'>
-                  {accessMode === 'login' ? 'Login' : 'Sign Up'}
-                </button>
-              ) : (
-                <button
-                  className='btn btn-light w-100'
-                  type='button'
-                  data-testid='waking-up-btn'
-                  disabled>
-                  <span
-                    className='spinner-grow text-warning spinner-grow-sm me-2'
-                    role='status'
-                    aria-hidden='true'></span>
-                  <b className='text-black'>Waking Up</b>
-                </button>
-              )}
-            </div>
-            {error && (
-              <div id='submitError' className='form-text pt-2'>
-                {error}
+      <div className='row justify-content-center'>
+        <div className='col-12 col-md-9'>
+          <div className='mt-5 p-4 border-black rounded sign-in container-sm'>
+            <AccessPrompt
+              accessMode={accessMode}
+              toggleAccessMode={toggleAccessMode}
+            />
+            <hr></hr>
+            <form onSubmit={handleSubmit} className='mt-4'>
+              <div className='row g-3 align-items-center justify-content-center'>
+                <div className='col-auto'>
+                  <label
+                    htmlFor='address'
+                    className='form-label visually-hidden'>
+                    Address
+                  </label>
+                </div>
+                <div className='col-12 col-sm-auto'>
+                  <input
+                    onChange={handleChange}
+                    type='text'
+                    className='form-control'
+                    id='address'
+                    placeholder='Jilly'
+                    value={addressInput}
+                  />
+                </div>
+                <div className='col-12 col-sm-auto'>
+                  {!isLoading ? (
+                    <button
+                      type='submit'
+                      className='btn btn-success w-100'
+                      data-testid='sign-in-btn'>
+                      {accessMode === 'login' ? 'Login' : 'Sign Up'}
+                    </button>
+                  ) : (
+                    <button
+                      className='btn btn-light w-100'
+                      type='button'
+                      data-testid='waking-up-btn'
+                      disabled>
+                      <span
+                        className='spinner-grow text-warning spinner-grow-sm me-2'
+                        role='status'
+                        aria-hidden='true'></span>
+                      <b className='text-black'>Waking Up</b>
+                    </button>
+                  )}
+                </div>
+                {error && (
+                  <div id='submitError' className='form-text pt-2'>
+                    {error}
+                  </div>
+                )}
               </div>
-            )}
+            </form>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
