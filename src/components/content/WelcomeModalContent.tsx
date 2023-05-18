@@ -1,3 +1,4 @@
+// @/components/content/WelcomeModalContent.tsx
 import { useAppSelector } from '@/store/store';
 
 const WelcomeModalContent = () => {
