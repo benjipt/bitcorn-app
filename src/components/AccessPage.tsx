@@ -108,7 +108,7 @@ const AccessPage = ({ getData }: SignInPageProps) => {
                 Address
               </label>
             </div>
-            <div className='col-auto'>
+            <div className='col-12 col-sm-auto'>
               <input
                 onChange={handleChange}
                 type='text'
@@ -118,17 +118,17 @@ const AccessPage = ({ getData }: SignInPageProps) => {
                 value={addressInput}
               />
             </div>
-            <div className='col-auto'>
+            <div className='col-12 col-sm-auto'>
               {!isLoading ? (
                 <button
                   type='submit'
-                  className='btn btn-success'
+                  className='btn btn-success w-100'
                   data-testid='sign-in-btn'>
                   {accessMode === 'login' ? 'Login' : 'Sign Up'}
                 </button>
               ) : (
                 <button
-                  className='btn btn-light'
+                  className='btn btn-light w-100'
                   type='button'
                   data-testid='waking-up-btn'
                   disabled>
