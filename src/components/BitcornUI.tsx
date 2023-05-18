@@ -21,7 +21,7 @@ const BitcornUI = ({ getData }: BitcornUIProps) => {
     isNewUser,
   } = useAppSelector(state => state.user);
   const showWelcomeModal = useAppSelector(
-    state => state.ui.showModal == ModalTypes.WELCOME
+    state => state.ui.showModal === ModalTypes.WELCOME
   );
 
   const dispatch = useAppDispatch();
