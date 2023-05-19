@@ -8,12 +8,26 @@ import {
 } from 'recharts';
 import { BalancePlot } from '@/types';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import { useEffect, useState } from 'react';
 
 interface ChartCardProps {
   data: BalancePlot[];
 }
 
 export default function ChartCard({ data }: ChartCardProps) {
+  const [height, setHeight] = useState(window.innerWidth > 992 ? 550 : 275);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setHeight(window.innerWidth > 992 ? 550 : 275);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div
       className='container mt-5 p-4 border-black rounded card-custom'
@@ -23,7 +37,7 @@ export default function ChartCard({ data }: ChartCardProps) {
       </div>
       <hr></hr>
       <ErrorBoundary>
-        <ResponsiveContainer width='100%' height={550}>
+        <ResponsiveContainer width='100%' height={height}>
           <LineChart data={data} className='linechart-style'>
             <XAxis dataKey='date' />
             <YAxis />
