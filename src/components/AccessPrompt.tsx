@@ -10,7 +10,7 @@ const AccessPrompt = ({ accessMode, toggleAccessMode }: AccessPromptProps) => {
       <p>
         {accessMode === 'login'
           ? 'Welcome! Please sign in with your Bitcorn address.'
-          : 'Enter your new bitcorn address below.'}
+          : 'Enter your new Bitcorn address below.'}
       </p>
       <button
         type='button'
