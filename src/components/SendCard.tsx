@@ -1,3 +1,4 @@
+// @/components/SendCard.tsx
 import { useState, ChangeEvent, SyntheticEvent } from 'react';
 interface SendCardProps {
   address: string;
