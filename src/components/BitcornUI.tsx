@@ -1,5 +1,5 @@
-// BitcornUI.tsx is a child component of App.tsx. It renders the AppBar, BalanceCard, SendCard, and ChartCard components.
-import React, { useEffect } from 'react';
+// @/components/BitcornUI.tsx
+import React, { useEffect, useState } from 'react';
 import AppBar from '@/components/AppBar';
 import BalanceCard from '@/components/BalanceCard';
 import SendCard from '@/components/SendCard';
@@ -30,22 +30,42 @@ const BitcornUI = ({ getData }: BitcornUIProps) => {
     if (isNewUser) dispatch(openModal(ModalTypes.WELCOME));
   }, [isNewUser, dispatch]);
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <div>
+    <div className='mb-4'>
       <AppBar address={address} />
       <div className='container-fluid'>
         {showWelcomeModal && <Modal />}
         <div className='row ps-3'>
           <div className='row col-lg-4 me-3'>
             <BalanceCard balance={balance} />
-            <SendCard
-              address={address}
-              getData={getData}
-              postTransaction={postTransaction}
-            />
+            {/* At this breakpoint, all components here render in one column. Chartcard should then render above the SendCard */}
+            {windowWidth > 992 ? (
+              <SendCard
+                address={address}
+                getData={getData}
+                postTransaction={postTransaction}
+              />
+            ) : (
+              <ChartCard data={data} />
+            )}
           </div>
           <div className='row col-lg-8'>
-            <ChartCard data={data} />
+            {windowWidth > 992 ? (
+              <ChartCard data={data} />
+            ) : (
+              <SendCard
+                address={address}
+                getData={getData}
+                postTransaction={postTransaction}
+              />
+            )}
           </div>
         </div>
       </div>
