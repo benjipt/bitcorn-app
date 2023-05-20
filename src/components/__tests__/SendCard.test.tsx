@@ -1,3 +1,4 @@
+// @/components/__tests__/SendCard.tsx
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import SendCard from '@/components/SendCard';
@@ -60,5 +61,45 @@ describe('SendCard', () => {
     // Wait for the error message to be displayed
     const errorMessage = await screen.findByTestId('error-1');
     expect(errorMessage).toBeInTheDocument();
+  });
+
+  it('should not allow more than six digits after the decimal in amount', () => {
+    render(
+      <SendCard
+        address=''
+        getData={() => {}}
+        postTransaction={mockPostTransaction}
+      />
+    );
+    const amountInput = screen.getByTestId('input-2');
+
+    fireEvent.change(amountInput, { target: { value: '123456.1234567' } });
+    expect(amountInput).not.toHaveValue('123456.1234567');
+
+    fireEvent.change(amountInput, { target: { value: '123456.123456' } });
+    expect(amountInput).toHaveValue('123456.123456');
+  });
+
+  it('should only accept valid characters in amount', () => {
+    render(
+      <SendCard
+        address=''
+        getData={() => {}}
+        postTransaction={mockPostTransaction}
+      />
+    );
+    const amountInput = screen.getByTestId('input-2');
+
+    fireEvent.change(amountInput, { target: { value: 'abc' } });
+    expect(amountInput).not.toHaveValue('abc');
+
+    fireEvent.change(amountInput, { target: { value: '123456' } });
+    expect(amountInput).toHaveValue('123456');
+
+    fireEvent.change(amountInput, { target: { value: '123.456' } });
+    expect(amountInput).toHaveValue('123.456');
+
+    fireEvent.change(amountInput, { target: { value: '.' } });
+    expect(amountInput).toHaveValue('.');
   });
 });

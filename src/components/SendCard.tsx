@@ -28,7 +28,19 @@ export default function SendCard({
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.currentTarget;
-    setInputValue({ ...inputValue, [id]: value });
+    if (id === 'amount') {
+      // Prevent user from entering more than 6 digits on amount input
+      const [, fractionalPart = ''] = value.split('.');
+      // Also prevent user from entering non-number characters
+      if (
+        value === '.' ||
+        (!isNaN(Number(value)) && fractionalPart.length <= 6)
+      ) {
+        setInputValue({ ...inputValue, [id]: value });
+      }
+    } else {
+      setInputValue({ ...inputValue, [id]: value });
+    }
   };
 
   const { toAddress, amount } = inputValue;
