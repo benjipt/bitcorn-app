@@ -1,8 +1,11 @@
 // @/components/content/WelcomeModalContent.tsx
-import { useAppSelector } from '@/store/store';
+import { closeModal } from '@/store/slices/uiSlice';
+import { useAppDispatch, useAppSelector } from '@/store/store';
 
 const WelcomeModalContent = () => {
   const { address: name, balance } = useAppSelector(state => state.user);
+
+  const dispatch = useAppDispatch();
 
   return (
     <div className='text-center'>
@@ -20,6 +23,13 @@ const WelcomeModalContent = () => {
         For each day you hold at least 10 Bitcorns in your wallet, the Bitcorn
         Chain will automatically reward you with 25 Bitcorns.
       </p>
+      <div className='d-flex justify-content-center'>
+        <button
+          className='btn btn-success w-50'
+          onClick={() => dispatch(closeModal())}>
+          Ok
+        </button>
+      </div>
     </div>
   );
 };
