@@ -1,4 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono&family=Work+Sans&display=swap');
+@font-face {
+  font-family: 'Press Start 2P';
+  src: url('./assets/fonts/Press_Start_2P/PressStart2P-Regular.ttf')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  src: url('./assets/fonts/Space_Mono/SpaceMono-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Work Sans';
+  src: url('./assets/fonts/Work_Sans/WorkSans-VariableFont_wght.ttf')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 body {
   margin: 0;
