@@ -17,6 +17,10 @@
 - [Technologies](#technologies)
 - [Changelog](#changelog)
 
+## UPDATE
+
+As of 10.15.24, this project has been temporarily suspended as a cost savings measure. I have plans to deploy the backend service supporting this project to Vercel at a later date. In the meantime, feel free to review the code for this project or it's backend service [bitcorn-chain](https://github.com/benjipt/bitcorn-chain).
+
 ## General info
 
 React wallet client for a fictional cryptocurrency called Bitcorn. Built with React, Redux, Typescript, Bootstrap, D3 (Recharts), & Vite. Read about the backend service: [bitcorn-chain](https://github.com/benjipt/bitcorn-chain).
